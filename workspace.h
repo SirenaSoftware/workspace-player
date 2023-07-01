@@ -47,11 +47,23 @@ private slots:
     void on_clock_clicked();
     void on_saveModifications_clicked();
 
+    // Left bar widget
     void on_addModule_clicked();
-
     void on_moduleOptions_clicked();
-
     void on_moduleList_itemActivated(QListWidgetItem *item);
+
+    // Edit bar buttons
+    void on_gotoSecondBar_clicked();
+    void on_undo_clicked();
+    void on_redo_clicked();
+    void on_cut_clicked();
+    void on_copy_clicked();
+    void on_paste_clicked();
+    void on_delete__clicked();
+    void on_find_clicked();
+    void on_replace_clicked();
+    void on_gotoLine_clicked();
+
 
 private:
     Ui::Workspace *ui;

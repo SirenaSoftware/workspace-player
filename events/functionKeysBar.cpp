@@ -1,6 +1,7 @@
 #include "workspace.h"
 #include "ui_workspace.h"
 
+
 void Workspace::on_actionEsc_triggered()
 {
 
