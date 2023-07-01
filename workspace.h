@@ -2,6 +2,7 @@
 #define WORKSPACE_H
 
 #include <QMainWindow>
+#include <QListWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Workspace; }
@@ -45,6 +46,12 @@ private slots:
     void on_discardModifications_clicked();
     void on_clock_clicked();
     void on_saveModifications_clicked();
+
+    void on_addModule_clicked();
+
+    void on_moduleOptions_clicked();
+
+    void on_moduleList_itemActivated(QListWidgetItem *item);
 
 private:
     Ui::Workspace *ui;

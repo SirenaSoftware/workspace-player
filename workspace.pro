@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     events/functionKeysBar.cpp \
+    events/leftBar.cpp \
     events/topBar.cpp \
     main.cpp \
     workspace.cpp
