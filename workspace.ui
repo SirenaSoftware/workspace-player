@@ -27,7 +27,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
-     <number>0</number>
+     <number>2</number>
     </property>
     <property name="leftMargin">
      <number>0</number>
@@ -39,7 +39,7 @@
      <number>0</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>2</number>
     </property>
     <item>
      <widget class="QStackedWidget" name="topBar">
@@ -183,6 +183,9 @@
     <item>
      <widget class="QWidget" name="horizontalWidget_2" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>2</number>
+       </property>
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -205,16 +208,16 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="topMargin">
-           <number>6</number>
+           <number>4</number>
           </property>
           <property name="rightMargin">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>6</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QWidget" name="moduleBox" native="true">
@@ -254,6 +257,12 @@
                 </property>
                 <item>
                  <widget class="QPushButton" name="addModule">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>32</height>
+                   </size>
+                  </property>
                   <property name="maximumSize">
                    <size>
                     <width>16777215</width>
@@ -273,7 +282,7 @@
                   <property name="minimumSize">
                    <size>
                     <width>32</width>
-                    <height>0</height>
+                    <height>32</height>
                    </size>
                   </property>
                   <property name="maximumSize">
@@ -320,17 +329,15 @@
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        <widget class="QStackedWidget" name="contentPager">
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+         <widget class="QWidget" name="modulesPage"/>
+         <widget class="QWidget" name="printPage"/>
+         <widget class="QWidget" name="addModulePage"/>
+         <widget class="QWidget" name="insertContentPage"/>
+        </widget>
        </item>
        <item>
         <widget class="QStackedWidget" name="rightBar">
@@ -346,10 +353,10 @@
             <number>2</number>
            </property>
            <property name="leftMargin">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="topMargin">
-            <number>6</number>
+            <number>4</number>
            </property>
            <property name="rightMargin">
             <number>0</number>
