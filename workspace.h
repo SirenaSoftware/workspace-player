@@ -16,43 +16,29 @@ public:
     ~Workspace();
 
 private slots:
+    // Function keys
     void on_actionF1_triggered();
-
     void on_actionF2_triggered();
-
     void on_actionF3_triggered();
-
     void on_actionF4_triggered();
-
     void on_actionF5_triggered();
-
     void on_actionF6_triggered();
-
     void on_actionF7_triggered();
-
     void on_actionF8_triggered();
-
     void on_actionF9_triggered();
-
     void on_actionF10_triggered();
-
     void on_actionF11_triggered();
-
     void on_actionF12_triggered();
 
+    // Special keys
     void on_actionEsc_triggered();
-
     void on_actionHome_triggered();
-
     void on_actionPageUp_triggered();
-
     void on_actionPageDown_triggered();
-
     void on_actionEnd_triggered();
-
     void on_actionMenu_triggered();
-
     void on_actionPrint_triggered();
+
 
 private:
     Ui::Workspace *ui;
