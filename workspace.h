@@ -39,8 +39,17 @@ private slots:
     void on_actionMenu_triggered();
     void on_actionPrint_triggered();
 
+    // Top bar widgets
+    void on_callWorkspaceViewer_clicked();
+    void on_callExportOrPrint_clicked();
+    void on_discardModifications_clicked();
+    void on_clock_clicked();
+    void on_saveModifications_clicked();
 
 private:
     Ui::Workspace *ui;
+
+    void hideChrome();
+    void showChrome();
 };
 #endif // WORKSPACE_H
