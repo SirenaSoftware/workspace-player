@@ -10,14 +10,14 @@ void Workspace::on_callWorkspaceViewer_clicked()
 
 void Workspace::on_callExportOrPrint_clicked()
 {
-    if (ui->contentPager->currentWidget()!=ui->printPage){
-        ui->contentPager->setCurrentWidget(ui->printPage);
-        hideChrome();
+    if (ui->workspaceHeader->height()==0){
+        ui->contentPager->setCurrentWidget(ui->modulesPage);
+        showChrome();
         return;
     }
 
-    ui->contentPager->setCurrentWidget(ui->modulesPage);
-    showChrome();
+    ui->contentPager->setCurrentWidget(ui->printPage);
+    hideChrome();
 }
 
 
