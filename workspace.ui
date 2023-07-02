@@ -28,12 +28,40 @@
   <property name="styleSheet">
    <string notr="true">QPushButton {
   padding: 9;
-}</string>
+}
+
+#topBar {
+	background-color: rgb(101, 255, 255);
+}
+
+#rightBar {
+	background-color: rgb(85, 255, 127);
+}
+
+#leftBar {
+	background-color: rgb(170, 85, 255);
+}
+
+#moduleBox {
+	background-color: rgb(255, 255, 0);
+}
+
+#modulesPage {
+	background-color: rgb(170, 0, 0);
+}
+
+#printPage {
+	background-color: rgb(0, 0, 127);
+}
+
+#addModulePage {
+	background-color: rgb(0, 85, 0);
+}r</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="leftMargin">
      <number>0</number>
@@ -61,6 +89,11 @@
         <height>50</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">#defaultTopBar {
+	background-color: transparent;
+}</string>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -73,7 +106,7 @@
          <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>6</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -84,8 +117,14 @@
            <property name="leftMargin">
             <number>1</number>
            </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <property name="rightMargin">
-            <number>6</number>
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
            </property>
            <item>
             <widget class="QToolButton" name="hamburguerButton">
@@ -97,8 +136,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>32</width>
-               <height>32</height>
+               <width>40</width>
+               <height>40</height>
               </size>
              </property>
              <property name="font">
@@ -125,6 +164,12 @@
                <height>40</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -141,7 +186,13 @@
              <property name="minimumSize">
               <size>
                <width>240</width>
-               <height>40</height>
+               <height>37</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>37</height>
               </size>
              </property>
             </widget>
@@ -255,7 +306,7 @@
            <number>0</number>
           </property>
           <property name="topMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>0</number>
@@ -304,13 +355,13 @@
                   <property name="minimumSize">
                    <size>
                     <width>0</width>
-                    <height>32</height>
+                    <height>40</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
                     <width>16777215</width>
-                    <height>32</height>
+                    <height>40</height>
                    </size>
                   </property>
                   <property name="styleSheet">
@@ -325,14 +376,14 @@
                  <widget class="QToolButton" name="moduleOptions">
                   <property name="minimumSize">
                    <size>
-                    <width>32</width>
-                    <height>32</height>
+                    <width>40</width>
+                    <height>40</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
                     <width>16777215</width>
-                    <height>32</height>
+                    <height>40</height>
                    </size>
                   </property>
                   <property name="text">
@@ -378,7 +429,7 @@
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="modulesPage"/>
          <widget class="QWidget" name="printPage"/>
@@ -394,6 +445,11 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">#editBar {
+	background-color: transparent;
+}</string>
+         </property>
          <widget class="QWidget" name="editBar">
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <property name="spacing">
@@ -403,7 +459,7 @@
             <number>0</number>
            </property>
            <property name="topMargin">
-            <number>4</number>
+            <number>0</number>
            </property>
            <property name="rightMargin">
             <number>0</number>
@@ -413,6 +469,12 @@
            </property>
            <item>
             <widget class="QToolButton" name="gotoSecondBar">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -433,6 +495,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="undo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -446,6 +514,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="redo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -466,6 +540,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="cut">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -479,6 +559,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="copy">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -492,6 +578,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="paste">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -505,6 +597,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="delete_">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -525,6 +623,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="find">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -538,6 +642,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="replace">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -558,6 +668,12 @@
            </item>
            <item>
             <widget class="QToolButton" name="gotoLine">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="minimumSize">
               <size>
                <width>32</width>

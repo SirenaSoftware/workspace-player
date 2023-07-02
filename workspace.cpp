@@ -6,6 +6,7 @@ Workspace::Workspace(QWidget *parent)
     , ui(new Ui::Workspace)
 {
     ui->setupUi(this);
+    ui->contentPager->setCurrentWidget(ui->modulesPage);
 }
 
 Workspace::~Workspace()
@@ -20,7 +21,7 @@ void Workspace::resizeEvent(QResizeEvent *event)
     {
         ui->contentArea->removeWidget(ui->leftBar);
         ui->leftBar->setParent(this);
-        ui->leftBar->move(0,ui->topBar->height()+2);
+        ui->leftBar->move(0,ui->topBar->height());
         ui->leftBar->resize(200,event->size().height()-ui->leftBar->y());
         ui->hamburguerButton->show();
 

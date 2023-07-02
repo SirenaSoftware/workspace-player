@@ -75,5 +75,7 @@ private:
 
     void hideChrome();
     void showChrome();
+
+
 };
 #endif // WORKSPACE_H
