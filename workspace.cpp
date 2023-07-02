@@ -14,6 +14,28 @@ Workspace::~Workspace()
 }
 
 
+void Workspace::resizeEvent(QResizeEvent *event)
+{
+    if (event->size().width()<1024)
+    {
+        ui->contentArea->removeWidget(ui->leftBar);
+        ui->leftBar->setParent(this);
+        ui->leftBar->move(0,ui->topBar->height()+2);
+        ui->leftBar->resize(200,event->size().height()-ui->leftBar->y());
+        ui->hamburguerButton->show();
+
+        if (ui->hamburguerButton->isChecked()) {
+            ui->leftBar->show();
+        }
+        return;
+    }
+
+    ui->leftBar->show();
+    ui->contentArea->insertWidget(0,ui->leftBar);
+    ui->hamburguerButton->hide();
+}
+
+
 void Workspace::showChrome()
 {
     int topBarHeight = ui->topBar->height();

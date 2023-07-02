@@ -2,6 +2,18 @@
 #include "ui_workspace.h"
 
 
+void Workspace::on_hamburguerButton_clicked(bool checked)
+{
+    if (checked)
+    {
+        ui->leftBar->show();
+        return;
+    }
+
+    ui->leftBar->hide();
+}
+
+
 void Workspace::on_callWorkspaceViewer_clicked()
 {
 

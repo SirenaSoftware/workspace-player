@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QListWidgetItem>
+#include <QResizeEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Workspace; }
@@ -41,6 +42,7 @@ private slots:
     void on_actionPrint_triggered();
 
     // Top bar widgets
+    void on_hamburguerButton_clicked(bool checked);
     void on_callWorkspaceViewer_clicked();
     void on_callExportOrPrint_clicked();
     void on_discardModifications_clicked();
@@ -64,6 +66,9 @@ private slots:
     void on_replace_clicked();
     void on_gotoLine_clicked();
 
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     Ui::Workspace *ui;
