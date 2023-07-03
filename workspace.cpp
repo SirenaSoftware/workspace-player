@@ -1,5 +1,6 @@
 #include "workspace.h"
 #include "ui_workspace.h"
+#include <QTimer>
 
 Workspace::Workspace(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +14,11 @@ Workspace::Workspace(QWidget *parent)
     ui->leftBar->move(0,ui->topBar->height());
     ui->leftBar->resize(ui->leftBar->width(),height()-ui->leftBar->y());
     ui->leftBar->hide();
+
+    on_clock_update();
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Workspace::on_clock_update);
+    timer->start(1000);
 }
 
 

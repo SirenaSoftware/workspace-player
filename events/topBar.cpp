@@ -1,5 +1,6 @@
 #include "workspace.h"
 #include "ui_workspace.h"
+#include <QDateTime>
 
 
 void Workspace::on_hamburguerButton_clicked(bool checked)
@@ -42,6 +43,14 @@ void Workspace::on_discardModifications_clicked()
 void Workspace::on_clock_clicked()
 {
 
+}
+
+
+void Workspace::on_clock_update(){
+    QDateTime time = QDateTime::currentDateTime();
+    QString text = time.toString("hh:mm");
+
+    ui->clock->setText(text);
 }
 
 
