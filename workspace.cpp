@@ -38,13 +38,17 @@ void Workspace::resizeEvent(QResizeEvent *event)
         ui->leftBar->resize(ui->leftBar->width(),event->size().height()-ui->leftBar->y());
         ui->hamburguerButton->show();
 
-        if (ui->hamburguerButton->isChecked()) {
+        if (ui->hamburguerButton->isChecked()&&ui->contentPager->currentWidget() == ui->modulesPage) {
             ui->leftBar->show();
         }
+
         return;
     }
 
-    ui->leftBar->show();
+    if (ui->contentPager->currentWidget() == ui->modulesPage) {
+        ui->leftBar->show();
+    }
+
     ui->contentArea->insertWidget(0,ui->leftBar);
     ui->hamburguerButton->hide();
 }
@@ -52,14 +56,23 @@ void Workspace::resizeEvent(QResizeEvent *event)
 
 void Workspace::showChrome()
 {
-    int topBarHeight = ui->topBar->height();
+    int topBarButtonHeight = ui->callExportOrPrint->height();
 
-    ui->workspaceHeader->setMaximumHeight(topBarHeight);
-    ui->discardModifications->setMaximumHeight(topBarHeight);
-    ui->saveModifications->setMaximumHeight(topBarHeight);
+    ui->workspaceHeader->setMaximumHeight(topBarButtonHeight);
+    ui->discardModifications->setMaximumHeight(topBarButtonHeight);
+    ui->saveModifications->setMaximumHeight(topBarButtonHeight);
     ui->callExportOrPrint->setText("Export or Print");
-    ui->leftBar->show();
+
+    if (width()>=1024||ui->hamburguerButton->isChecked()) {
+        ui->leftBar->show();
+    }
+
     ui->rightBar->show();
+
+    if (ui->contentPager->currentWidget() == ui->modulesPage) {
+        ui->horizontalSpacer->show();
+        ui->workspaceHeader->show();
+    }
 }
 
 
@@ -70,5 +83,10 @@ void Workspace::hideChrome(){
     ui->callExportOrPrint->setText("Cancel");
     ui->leftBar->hide();
     ui->rightBar->hide();
+
+    if (ui->contentPager->currentWidget() == ui->addModulePage) {
+        ui->horizontalSpacer->hide();
+        ui->workspaceHeader->hide();
+    }
 }
 

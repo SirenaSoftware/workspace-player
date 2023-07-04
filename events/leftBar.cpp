@@ -4,8 +4,8 @@
 
 void Workspace::on_addModule_clicked()
 {
-    hideChrome();
     ui->contentPager->setCurrentWidget(ui->addModulePage);
+    hideChrome();
 }
 
 
