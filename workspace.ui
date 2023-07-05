@@ -129,7 +129,7 @@
            <item>
             <widget class="QToolButton" name="hamburguerButton">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -137,7 +137,7 @@
              <property name="minimumSize">
               <size>
                <width>40</width>
-               <height>40</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -165,7 +165,7 @@
            <item>
             <widget class="QToolButton" name="callWorkspaceViewer">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -173,7 +173,7 @@
              <property name="minimumSize">
               <size>
                <width>40</width>
-               <height>40</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
