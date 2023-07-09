@@ -26,12 +26,17 @@
    <string>Workspace</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">*[topButton=true] {
+   <string notr="true">*{
+  outline: none;
+}
+
+*[topButton=true] {
   padding: 9;
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,128);
   border-bottom: 2px solid rgba(0,0,0,128);
   background-color: rgb(170, 255, 255);
+  color: #000000;
 }
 
 *[topButton=true]:hover {
@@ -41,6 +46,14 @@
 *[topButton=true]:pressed {
   margin: 1;
   background-color: rgb(150, 225, 225);
+}
+
+#workspaceName {
+  background-color: rgb(200, 255, 255);
+  border: 0px;
+  padding: 9;
+  border-radius: 3px;
+  border-bottom: 2px solid rgba(0,0,0,128);
 }
 
 #hamburguerButton:checked{
@@ -58,6 +71,7 @@ QToolButton {
   border: 1px solid rgba(0,0,0,128);
   border-bottom: 2px solid rgba(0,0,0,128);
   background-color: rgb(65, 235, 107);
+  color: #000000;
 }
 
 QToolButton:hover {
@@ -66,6 +80,7 @@ QToolButton:hover {
 
 QToolButton:pressed,QToolButton:checked {
   background-color: rgb(35, 205, 77);
+  border-bottom: 1px solid rgba(0,0,0,128);
 }
 
 #rightBar {
@@ -78,18 +93,44 @@ QToolButton:pressed,QToolButton:checked {
   border: 1px solid rgba(0,0,0,128);
   border-bottom: 2px solid rgba(0,0,0,128);
   background-color: rgb(235, 235, 0);
+  color: #000000;
 }
 
 #addModule:hover,#moduleOptions:hover {
-  background-color: rgb(255, 255, 100);
+  background-color: rgb(215, 215, 0);
 }
 
 #addModule:pressed,#moduleOptions:pressed {
-    background-color: rgb(215, 215, 0);
+    background-color: rgb(205, 205, 0);
 }
 
 #leftBar {
 	background-color: rgb(170, 85, 255);
+}
+
+QListWidget {
+  border: 0;
+  text-align: left;
+  padding:6;
+  padding-top:0;
+  background-color: rgba(0, 0, 0, 0);
+  color: #000000;
+}
+
+#moduleList::item {
+  color: #000000;
+  padding-left: 2;
+  background-color: rgba(0,0,0,0);
+}
+
+#moduleList::item:hover {
+  background-color: rgb(215, 215, 0);
+  color: #000000;
+}
+
+#moduleList::item:selected {
+  background-color: rgb(205, 205, 0);
+  color: #000000;
 }
 
 #moduleBox {
@@ -106,6 +147,10 @@ QToolButton:pressed,QToolButton:checked {
 
 #addModulePage {
 	background-color: rgb(0, 85, 0);
+}
+
+QFrame[line=true] {
+  border: 1px solid rgba(0,0,0,128);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -485,13 +530,32 @@ QToolButton:pressed,QToolButton:checked {
              </item>
              <item>
               <widget class="Line" name="line">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>1</height>
+                </size>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Plain</enum>
+               </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="line" stdset="0">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QListWidget" name="moduleList"/>
+              <widget class="QListWidget" name="moduleList">
+               <property name="iconSize">
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -570,6 +634,12 @@ QToolButton:pressed,QToolButton:checked {
                <height>32</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -577,8 +647,17 @@ QToolButton:pressed,QToolButton:checked {
            </item>
            <item>
             <widget class="Line" name="line_2">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="line" stdset="0">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -594,6 +673,12 @@ QToolButton:pressed,QToolButton:checked {
               <size>
                <width>32</width>
                <height>32</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
               </size>
              </property>
              <property name="text">
@@ -621,6 +706,12 @@ QToolButton:pressed,QToolButton:checked {
                <height>32</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -628,8 +719,17 @@ QToolButton:pressed,QToolButton:checked {
            </item>
            <item>
             <widget class="Line" name="line_3">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="line" stdset="0">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -645,6 +745,12 @@ QToolButton:pressed,QToolButton:checked {
               <size>
                <width>32</width>
                <height>32</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
               </size>
              </property>
              <property name="text">
@@ -666,6 +772,12 @@ QToolButton:pressed,QToolButton:checked {
                <height>32</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -683,6 +795,12 @@ QToolButton:pressed,QToolButton:checked {
               <size>
                <width>32</width>
                <height>32</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
               </size>
              </property>
              <property name="text">
@@ -704,6 +822,12 @@ QToolButton:pressed,QToolButton:checked {
                <height>32</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -711,8 +835,17 @@ QToolButton:pressed,QToolButton:checked {
            </item>
            <item>
             <widget class="Line" name="line_4">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="line" stdset="0">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -728,6 +861,12 @@ QToolButton:pressed,QToolButton:checked {
               <size>
                <width>32</width>
                <height>32</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
               </size>
              </property>
              <property name="text">
@@ -749,6 +888,12 @@ QToolButton:pressed,QToolButton:checked {
                <height>32</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -756,8 +901,17 @@ QToolButton:pressed,QToolButton:checked {
            </item>
            <item>
             <widget class="Line" name="line_5">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="line" stdset="0">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -773,6 +927,12 @@ QToolButton:pressed,QToolButton:checked {
               <size>
                <width>32</width>
                <height>32</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>34</height>
               </size>
              </property>
              <property name="text">

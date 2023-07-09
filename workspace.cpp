@@ -2,6 +2,8 @@
 #include "ui_workspace.h"
 #include <QTimer>
 
+#include <QSettings>
+
 Workspace::Workspace(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Workspace)
