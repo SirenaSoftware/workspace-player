@@ -4,6 +4,8 @@
 
 void Workspace::on_addModule_clicked()
 {
+    loadCategories("modules",ui->externalModulesCategories);
+
     ui->contentPager->setCurrentWidget(ui->addModulePage);
     hideChrome();
 }

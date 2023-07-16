@@ -90,3 +90,38 @@ void Workspace::hideChrome(){
     }
 }
 
+
+void Workspace::loadCategories(QString type,QListWidget*list){
+    list->clear();
+
+    for (const QString &source : QList<QString> { "_common", WORKSPACE_PATH} ) {
+        for (const QString &category : QDir(ROOT+type+"/"+source).entryList(QDir::Dirs)) {
+            if (category=="."||category=="..") continue;
+
+            if (source!="_common"&&QFile(ROOT+type+"/_common/"+category+"/label").exists()) {
+                continue;
+            }
+
+            QFile label(ROOT+type+"/"+source+"/"+category+"/label."+LANG);
+
+            if (!label.exists()){
+                label.setFileName(ROOT+type+"/"+source+"/"+category+"/label");
+                if (!label.exists()) continue;
+            }
+
+            label.open(QFile::ReadOnly);
+
+            QListWidgetItem*item = new QListWidgetItem;
+            item->setText(QString(label.readAll()).remove("\n").remove("\r"));
+            item->setIcon(QIcon(ROOT+type+"/"+source+"/"+category+"/icon.svg"));
+            item->setData(42,category);
+
+            list->addItem(item);
+
+            label.close();
+        }
+    }
+
+    list->sortItems();
+
+}

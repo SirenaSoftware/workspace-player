@@ -80,6 +80,8 @@ private:
     void hideChrome();
     void showChrome();
 
+    void loadCategories(QString type,QListWidget*list);
+
     const QString LANG = QString(qgetenv("LANG")).remove(".UTF-8");
     const QString ROOT = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.sirena/";
     QString WORKSPACE_ID = "sirena.demonstration";
