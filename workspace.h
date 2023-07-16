@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QListWidgetItem>
 #include <QResizeEvent>
+#include <QStandardPaths>
+#include <QDir>
+#include <QFile>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Workspace; }
@@ -76,6 +79,11 @@ private:
 
     void hideChrome();
     void showChrome();
+
+    const QString LANG = QString(qgetenv("LANG")).remove(".UTF-8");
+    const QString ROOT = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.sirena/";
+    QString WORKSPACE_ID = "sirena.demonstration";
+    QString WORKSPACE_PATH = "sirena/demonstration";
 
 };
 #endif // WORKSPACE_H
