@@ -47,7 +47,7 @@ private slots:
     void on_callExportOrPrint_clicked();
     void on_discardModifications_clicked();
     void on_clock_clicked();
-    void on_clock_update();
+    void _on_clock_update();
     void on_saveModifications_clicked();
 
     // Left bar widget

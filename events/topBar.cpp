@@ -46,7 +46,7 @@ void Workspace::on_clock_clicked()
 }
 
 
-void Workspace::on_clock_update(){
+void Workspace::_on_clock_update(){
     QDateTime time = QDateTime::currentDateTime();
     QString text = time.toString("hh:mm");
 
