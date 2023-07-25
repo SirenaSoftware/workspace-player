@@ -43,8 +43,8 @@
   background-color: rgb(200, 255, 255);
 }
 
-*[topButton=true]:pressed {
-  margin: 1;
+*[topButton=true]:pressed, #hamburguerButton:checked {
+  border-bottom: 1px solid rgba(0,0,0,128);
   background-color: rgb(150, 225, 225);
 }
 
@@ -53,12 +53,18 @@
   border: 0px;
   padding: 9;
   border-radius: 3px;
+  border-top: 1px solid rgb(200, 255, 255);
   border-bottom: 2px solid rgba(0,0,0,128);
 }
 
-#hamburguerButton:checked{
-  margin: 1;
-  background-color: rgb(150, 225, 225);
+#workspaceName:hover {
+  border-top: 1px solid rgba(0,0,0,128);
+  border-bottom: 2px solid rgba(0,0,0,128);
+}
+
+#workspaceName:focus {
+  border-top: 1px solid rgba(0,0,0,128);
+  border-bottom: 1px solid rgba(0,0,0,128);
 }
 
 #topBar {
@@ -105,7 +111,8 @@ QToolButton:pressed,QToolButton:checked {
 }
 
 #addModule:pressed,#moduleOptions:pressed {
-    background-color: rgb(205, 205, 0);
+  background-color: rgb(205, 205, 0);
+  border-bottom: 1px solid rgba(0,0,0,128);
 }
 
 #leftBar {
@@ -610,7 +617,7 @@ QFrame[line=true] {
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="modulesPage"/>
          <widget class="QWidget" name="printPage">
