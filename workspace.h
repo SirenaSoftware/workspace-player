@@ -70,6 +70,13 @@ private slots:
     void on_replace_clicked();
     void on_gotoLine_clicked();
 
+    // Add module page
+    void on_externalModulesCategories_itemActivated(QListWidgetItem *item);
+    void on_externalModulesList_itemActivated(QListWidgetItem *item);
+
+    // Export or print page
+    void on_exportersCategories_itemActivated(QListWidgetItem *item);
+    void on_exportersList_itemActivated(QListWidgetItem *item);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

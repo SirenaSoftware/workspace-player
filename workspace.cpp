@@ -124,4 +124,7 @@ void Workspace::loadCategories(QString type,QListWidget*list){
 
     list->sortItems();
 
+    if (list->item(0)) {
+        list->itemActivated(list->item(0));
+    }
 }
