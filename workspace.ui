@@ -26,7 +26,12 @@
    <string>Workspace</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">* {
+   <string notr="true">
+Workspace {
+  background-color: rgb(255, 170, 0)/**/;
+}
+
+* {
   outline: none;
 }
 
