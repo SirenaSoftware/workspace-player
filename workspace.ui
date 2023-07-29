@@ -26,167 +26,201 @@
    <string>Workspace</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">*{
+   <string notr="true">* {
   outline: none;
 }
 
 *[topButton=true] {
   padding: 9;
   border-radius: 3px;
-  border: 1px solid rgba(0,0,0,128);
-  border-bottom: 2px solid rgba(0,0,0,128);
-  background-color: rgb(170, 255, 255);
-  color: #000000;
+  border: 1px solid #3e7878;
+  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  background-color: #aaffff; /**/
+  color: #000000; /**/
 }
 
 *[topButton=true]:hover {
-  background-color: rgb(200, 255, 255);
+  background-color: #c8ffff; /**/
 }
 
-*[topButton=true]:pressed, #hamburguerButton:checked {
-  border-bottom: 1px solid rgba(0,0,0,128);
-  background-color: rgb(150, 225, 225);
+*[topButton=true]:pressed,
+#hamburguerButton:checked {
+  border-bottom: 1px solid #3e7878;
+  background-color: #96e1e1; /**/
 }
 
 #workspaceName {
-  background-color: rgb(200, 255, 255);
+  background-color: #c8ffff; /**/
   border: 0px;
   padding: 9;
   border-radius: 3px;
-  border-top: 1px solid rgb(200, 255, 255);
-  border-bottom: 2px solid rgba(0,0,0,128);
+  border-top: 1px solid #c8ffff; /**/
+  border-bottom: 2px solid rgba(0,0,0,128); /**/
 }
 
 #workspaceName:hover {
-  border-top: 1px solid rgba(0,0,0,128);
-  border-bottom: 2px solid rgba(0,0,0,128);
+  border-top: 1px solid #3e7878;
+  border-bottom: 2px solid rgba(0,0,0,128); /**/
 }
 
 #workspaceName:focus {
-  border-top: 1px solid rgba(0,0,0,128);
-  border-bottom: 1px solid rgba(0,0,0,128);
+  border-top: 1px solid #3e7878;
+  border-bottom: 1px solid #3e7878; /**/
 }
 
 #topBar {
-	background-color: rgb(101, 255, 255);
+  background-color: #65ffff; /**/
+}
+
+#discardModifications {
+	background-color: #FF7C89; /**/
+}
+
+#discardModifications:hover {
+	background-color: #FF907F; /**/
+}
+
+#discardModifications:pressed {
+	background-color: #EB5E75; /**/
+}
+
+#saveModifications {
+	background-color: #00AA00; /**/
+}
+
+#saveModifications:hover {
+	background-color: #14BE14; /**/
+}
+
+#saveModifications:pressed {
+	background-color: #009600; /**/
 }
 
 QLabel {
-  color: #000000;
+  color: #000000; /**/
 }
 
 QToolButton {
   padding: 9;
   border-radius: 3px;
-  border: 1px solid rgba(0,0,0,128);
-  border-bottom: 2px solid rgba(0,0,0,128);
-  background-color: rgb(65, 235, 107);
-  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 128); /**/
+  border-bottom: 2px solid #257a3a; /**/
+  background-color: #41eb6b; /**/
+  color: #000000; /**/
 }
 
 QToolButton:hover {
-  background-color: rgb(105, 255, 137);
+  background-color: #69ff89; /**/
 }
 
-QToolButton:pressed,QToolButton:checked {
-  background-color: rgb(35, 205, 77);
-  border-bottom: 1px solid rgba(0,0,0,128);
+QToolButton:pressed,
+QToolButton:checked {
+  background-color: #23cd4d; /**/
+  border-bottom: 1px solid rgba(0, 0, 0, 128); /**/
 }
 
 #rightBar {
-	background-color: rgb(85, 255, 127);
+  background-color: #55ff7f; /**/
 }
 
-#addModule, #moduleOptions {
+#addModule,
+#moduleOptions {
   padding: 9;
   border: 0px;
-  border: 1px solid rgba(0,0,0,128);
-  border-bottom: 2px solid rgba(0,0,0,128);
-  background-color: rgb(235, 235, 0);
-  color: #000000;
+  border: 1px solid #757500; /**/
+  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  background-color: #ebeb00; /**/
+  color: #000000; /**/
 }
 
-#addModule:hover,#moduleOptions:hover {
-  background-color: rgb(215, 215, 0);
+#addModule:hover,
+#moduleOptions:hover {
+  background-color: #d7d700; /**/
 }
 
-#addModule:pressed,#moduleOptions:pressed {
-  background-color: rgb(205, 205, 0);
-  border-bottom: 1px solid rgba(0,0,0,128);
+#addModule:pressed,
+#moduleOptions:pressed {
+  background-color: #cdcd00; /**/
+  border-bottom: 1px solid rgba(0,0,0,128); /**/
 }
 
 #leftBar {
-	background-color: rgb(170, 85, 255);
+  background-color: #aa55ff; /**/
 }
 
 QListWidget {
   border: 0;
   text-align: left;
-  padding:6;
-  padding-top:0;
-  background-color: rgba(0, 0, 0, 0);
-  color: #000000;
+  padding: 6;
+  padding-top: 0;
+  background-color: transparent;
+  color: #000000; /**/
 }
 
 QListWidget::item {
-  color: #000000;
+  color: #000000; /**/
   padding-left: 2;
-  background-color: rgba(0,0,0,0);
+  background-color: transparent;
 }
 
 #moduleList::item:hover {
-  background-color: rgb(215, 215, 0);
-  color: #000000;
+  background-color: #d7d700; /**/
+  color: #000000; /**/
 }
 
 #moduleList::item:selected {
-  background-color: rgb(205, 205, 0);
-  color: #000000;
+  background-color: #cdcd00; /**/
+  color: #000000; /**/
 }
 
 #moduleBox {
-	background-color: rgb(255, 255, 0);
+  background-color: #ffff00; /**/
 }
 
 #modulesPage {
-	background-color: rgb(170, 0, 0);
+  background-color: #aa0000; /**/
 }
 
 #addModuebox {
-  background-color: rgb(0, 170, 127);
+  background-color: #00aa7f; /**/
 }
 
 #exportWorkspace {
-	background-color: rgb(0, 170, 255);
+  background-color: #00aaff; /**/
 }
 
 #printPage {
-	background-color: rgb(0, 0, 127);
+  background-color: #00007f; /**/
 }
 
 #addModulePage {
-	background-color: rgb(0, 85, 0);
+  background-color: #005500; /**/
 }
 
-#exportersList::item:hover,#exportersCategories::item:hover {
-  background-color: rgb(0, 140, 225);
+#exportersList::item:hover,
+#exportersCategories::item:hover {
+  background-color: #008ce1; /**/
 }
 
-#exportersList::item:selected,#exportersCategories::item:selected {
-  background-color: rgb(0, 130, 215);
+#exportersList::item:selected,
+#exportersCategories::item:selected {
+  background-color: #0082d7; /**/
 }
 
-#externalModulesList::item:hover,#externalModulesCategories::item:hover {
-  background-color: rgb(0, 150, 107);
+#externalModulesList::item:hover,
+#externalModulesCategories::item:hover {
+  background-color: #00966b; /**/
 }
 
-#externalModulesList::item:selected,#externalModulesCategories::item:selected {
-  background-color: rgb(0, 130, 97);
+#externalModulesList::item:selected,
+#externalModulesCategories::item:selected {
+  background-color: #008261; /**/
 }
 
 QFrame[line=true] {
-  border: 1px solid rgba(0,0,0,128);
-}</string>
+  border: 1px solid rgba(0, 0, 0, 128); /**/
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
