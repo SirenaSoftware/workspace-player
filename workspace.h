@@ -7,6 +7,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QFile>
+#include "helpers/common.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Workspace; }
@@ -88,6 +89,8 @@ private:
     void showChrome();
 
     void loadCategories(QString type,QListWidget*list);
+
+    void loadConfig();
 
     const QString LANG = QString(qgetenv("LANG")).remove(".UTF-8");
     const QString ROOT = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.sirena/";

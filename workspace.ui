@@ -38,7 +38,7 @@ Workspace {
 *[topButton=true] {
   padding: 9;
   border-radius: 3px;
-  border: 1px solid #3e7878;
+  border: 1px solid rgba(0,0,0,128);
   border-bottom: 2px solid rgba(0,0,0,128); /**/
   background-color: #aaffff; /**/
   color: #000000; /**/
@@ -50,43 +50,31 @@ Workspace {
 
 *[topButton=true]:pressed,
 #hamburguerButton:checked {
-  border-bottom: 1px solid #3e7878;
+  border-bottom: 1px solid rgba(0,0,0,128);
   background-color: #96e1e1; /**/
 }
 
 #workspaceName {
-  background-color: #c8ffff; /**/
+  background-color: #c9ffff; /**/
   border: 0px;
   padding: 9;
   border-radius: 3px;
-  border-top: 1px solid #c8ffff; /**/
-  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  border-top: 1px solid rgba(0, 0, 0, 128); 
+  border-bottom: 2px solid rgba(0,0,0,128);
 }
 
 #workspaceName:hover {
-  border-top: 1px solid #3e7878;
-  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  border-top: 1px solid rgba(0, 0, 0, 128);
+  border-bottom: 2px solid rgba(0,0,0,128); 
 }
 
 #workspaceName:focus {
-  border-top: 1px solid #3e7878;
-  border-bottom: 1px solid #3e7878; /**/
+  border-top: 1px solid rgba(0, 0, 0, 128);
+  border-bottom: 1px solid rgba(0, 0, 0, 128);
 }
 
 #topBar {
   background-color: #65ffff; /**/
-}
-
-#discardModifications {
-	background-color: #FF7C89; /**/
-}
-
-#discardModifications:hover {
-	background-color: #FF907F; /**/
-}
-
-#discardModifications:pressed {
-	background-color: #EB5E75; /**/
 }
 
 #saveModifications {
@@ -101,6 +89,18 @@ Workspace {
 	background-color: #009600; /**/
 }
 
+#discardModifications, #saveModifications[forceDiscard=true]{
+	background-color: #FF7C89; /**/
+}
+
+#discardModifications:hover,#saveModifications[forceDiscard=true]:hover {
+	background-color: #FF907F; /**/
+}
+
+#discardModifications:pressed, #saveModifications[forceDiscard=true]:pressed {
+	background-color: #EB5E75; /**/
+}
+
 QLabel {
   color: #000000; /**/
 }
@@ -108,8 +108,8 @@ QLabel {
 QToolButton {
   padding: 9;
   border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 128); /**/
-  border-bottom: 2px solid #257a3a; /**/
+  border: 1px solid rgba(0, 0, 0, 128);
+  border-bottom: 2px solid rgba(0, 0, 0, 128);
   background-color: #41eb6b; /**/
   color: #000000; /**/
 }
@@ -121,7 +121,7 @@ QToolButton:hover {
 QToolButton:pressed,
 QToolButton:checked {
   background-color: #23cd4d; /**/
-  border-bottom: 1px solid rgba(0, 0, 0, 128); /**/
+  border-bottom: 1px solid rgba(0, 0, 0, 128);
 }
 
 #rightBar {
@@ -132,8 +132,8 @@ QToolButton:checked {
 #moduleOptions {
   padding: 9;
   border: 0px;
-  border: 1px solid #757500; /**/
-  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  border: 1px solid rgba(0,0,0,128);
+  border-bottom: 2px solid rgba(0,0,0,128); 
   background-color: #ebeb00; /**/
   color: #000000; /**/
 }
@@ -146,7 +146,7 @@ QToolButton:checked {
 #addModule:pressed,
 #moduleOptions:pressed {
   background-color: #cdcd00; /**/
-  border-bottom: 1px solid rgba(0,0,0,128); /**/
+  border-bottom: 1px solid rgba(0,0,0,128); 
 }
 
 #leftBar {
@@ -242,7 +242,7 @@ QFrame[line=true] {
      <number>0</number>
     </property>
     <property name="bottomMargin">
-     <number>2</number>
+     <number>0</number>
     </property>
     <item>
      <widget class="QStackedWidget" name="topBar">
@@ -509,6 +509,9 @@ QFrame[line=true] {
            <height>16777215</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
            <number>0</number>
@@ -656,7 +659,7 @@ QFrame[line=true] {
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="modulesPage"/>
          <widget class="QWidget" name="printPage">
@@ -775,6 +778,9 @@ QFrame[line=true] {
                   </item>
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
                     <item>
                      <widget class="QListWidget" name="exportersList">
                       <property name="enabled">
@@ -812,12 +818,20 @@ QFrame[line=true] {
                         <height>16777215</height>
                        </size>
                       </property>
+                      <property name="styleSheet">
+                       <string notr="true">  padding: 6;</string>
+                      </property>
                       <property name="iconSize">
                        <size>
                         <width>26</width>
                         <height>26</height>
                        </size>
                       </property>
+                      <item>
+                       <property name="text">
+                        <string>New Item</string>
+                       </property>
+                      </item>
                      </widget>
                     </item>
                    </layout>
@@ -970,6 +984,9 @@ QFrame[line=true] {
                   </item>
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_3">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
                     <item>
                      <widget class="QListWidget" name="externalModulesList">
                       <property name="iconSize">
@@ -1003,6 +1020,9 @@ QFrame[line=true] {
                         <width>200</width>
                         <height>16777215</height>
                        </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">  padding: 6;</string>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -1074,7 +1094,7 @@ QFrame[line=true] {
             <number>0</number>
            </property>
            <property name="topMargin">
-            <number>0</number>
+            <number>2</number>
            </property>
            <property name="rightMargin">
             <number>0</number>
