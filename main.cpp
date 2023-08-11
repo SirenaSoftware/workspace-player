@@ -8,11 +8,12 @@ int main(int argc, char *argv[])
     a.setStyle("Fusion");
 
     Workspace w;
+    w.move(0,0);
+    w.resize(800,600);
     w.setWindowFlags(Qt::FramelessWindowHint);
     w.setWindowState(Qt::WindowFullScreen);
     w.setWindowFlags(Qt::FramelessWindowHint);
-    w.resize(800,600);
-    w.move(0,0);
-    w.show();
+    w.updateGeometry();
+    w.showMaximized();
     return a.exec();
 }
