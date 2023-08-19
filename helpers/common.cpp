@@ -6,18 +6,17 @@ void print(QString message){
 }
 
 QStringList processSAMLLine(QString line){
-    QStringList list;
-
-    QString property = line.left(line.indexOf(":")).trimmed();
+    QString property = line.left(line.indexOf(":"));
     QString value = line.mid(line.indexOf(":")+1).trimmed();
+
+    int i = 0;
+    for(i = 0; i < property.size() && property[i] == ' '; ++i);
 
     if (value.left(1) == "\"" && value.right(1) == "\"") {
         value = value.mid(1,value.length()-2).toLocal8Bit();
     }
 
-    list << property.remove(" ") << value;
-
-    return list;
+    return QStringList() << property.trimmed().remove(" ") << value << QString::number(i/2);
 }
 
 #include <QLabel>
