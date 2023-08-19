@@ -96,11 +96,11 @@ void Workspace::hideChrome(){
 
 void Workspace::loadCategories(QString type,QListWidget*list){
 
-    for (const QString &source : QList<QString> { "_common", WORKSPACE_PATH} ) {
+    for (const QString &source : QList<QString> { "_common", WORKSPACE_CLASS, WORKSPACE_PATH} ) {
         for (const QString &category : QDir(ROOT+type+"/"+source).entryList(QDir::Dirs)) {
             if (category=="."||category=="..") continue;
 
-            if (source!="_common"&&QFile(ROOT+type+"/_common/"+category+"/label").exists()) {
+            if ((source!="_common")&&QFile(ROOT+type+"/_common/"+category+"/label").exists()) {
                 continue;
             }
 
@@ -171,6 +171,11 @@ void Workspace::loadConfig(){
                 ui->workspaceName->setStyleSheet(value == "true"?"border:0;":"");
                 ui->workspaceName->setReadOnly(value == "true");
                 ui->workspaceName->setAttribute(Qt::WA_TransparentForMouseEvents);
+                continue;
+            }
+
+            if (property == "class") {
+                WORKSPACE_CLASS = value;
                 continue;
             }
 

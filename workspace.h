@@ -96,6 +96,7 @@ private:
     const QString ROOT = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/.sirena/";
     QString WORKSPACE_ID = "sirena.demonstration";
     QString WORKSPACE_PATH = "sirena/demonstration";
+    QString WORKSPACE_CLASS = "empty";
 
 };
 #endif // WORKSPACE_H
