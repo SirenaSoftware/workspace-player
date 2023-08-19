@@ -19,3 +19,20 @@ QStringList processSAMLLine(QString line){
 
     return list;
 }
+
+#include <QLabel>
+
+QWidget*string2widget(QString id,QString type){
+    QWidget*wdg = nullptr;
+
+    if (type == "Label") {
+        wdg = new QLabel;
+        goto finalize;
+    }
+
+    wdg = new QWidget;
+
+finalize:
+    wdg->setObjectName(id);
+    return wdg;
+}
