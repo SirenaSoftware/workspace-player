@@ -51,6 +51,10 @@ void assingProperty(QWidget*widget,QString property, QString value) {
     widget->setProperty(property.toLocal8Bit(),value);
 }
 
+void buildStyleSheet(QWidget*widget){
+
+}
+
 void loadLayout(QString layout_file,QWidget*page){
     QFile file(layout_file);
 
@@ -60,7 +64,7 @@ void loadLayout(QString layout_file,QWidget*page){
         QMap<int,QWidget*>list;
         list[0] = page;
 
-        QWidget*current_widget = list[0];
+        QWidget*current_widget = nullptr;
         QWidget*parent_widget = list[0];
 
         QString id = "";
@@ -80,6 +84,10 @@ void loadLayout(QString layout_file,QWidget*page){
             }
 
             if (property == "type") {
+                if (current_widget) {
+                    buildStyleSheet(current_widget);
+                }
+
                 current_widget = string2widget(id,value);
                 list[indent+1] = current_widget;
 
@@ -93,7 +101,7 @@ void loadLayout(QString layout_file,QWidget*page){
             }
 
             if (property.startsWith("@")){
-                assingProperty(list[0],property.mid(1),value);
+                assingProperty(page,property.mid(1),value);
                 continue;
             }
 
@@ -101,6 +109,13 @@ void loadLayout(QString layout_file,QWidget*page){
                 assingProperty(current_widget,property,value);
             }
         }
+
+        if (current_widget) {
+            buildStyleSheet(current_widget);
+        }
+
+        buildStyleSheet(page);
+
         file.close();
         return;
     }
