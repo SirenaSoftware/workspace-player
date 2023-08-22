@@ -65,7 +65,7 @@ void loadLayout(QString layout_file,QWidget*page){
         list[0] = page;
 
         QWidget*current_widget = nullptr;
-        QWidget*parent_widget = list[0];
+        QWidget*parent_widget = page;
 
         QString id = "";
 
@@ -77,6 +77,7 @@ void loadLayout(QString layout_file,QWidget*page){
             int indent = line[2].toInt();
 
             parent_widget = list[indent];
+            if (!parent_widget) continue;
 
             if (property == "id") {
                 id = value;
