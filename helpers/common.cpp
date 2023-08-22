@@ -48,7 +48,156 @@ finalize:
 }
 
 void assingProperty(QWidget*widget,QString property, QString value) {
-    widget->setProperty(property.toLocal8Bit(),value);
+    if (property == "pos[x]") {
+        widget->move(value.toInt(),widget->y());
+        return;
+    }
+
+    if (property == "pos[y]") {
+        widget->move(widget->x(),value.toInt());
+        return;
+    }
+
+    if (property == "width") {
+        widget->resize(value.toInt(),widget->height());
+        return;
+    }
+
+    if (property == "height") {
+        widget->resize(widget->width(),value.toInt());
+        return;
+    }
+
+    if (property == "width[min]") {
+        widget->setMinimumWidth(value.toInt());
+        return;
+    }
+
+    if (property == "height[min]") {
+        widget->setMinimumHeight(value.toInt());
+        return;
+    }
+
+    if (property == "width[max]") {
+        widget->setMaximumWidth(value.toInt());
+        return;
+    }
+
+    if (property == "height[max]") {
+        widget->setMaximumHeight(value.toInt());
+        return;
+    }
+
+    if (property.startsWith("font[")) {
+        QFont font = QFont(widget->font());
+
+        if (property == "font[name]") {
+            font.setFamily(value);
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[style]") {
+            font.setStyleName(value);
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[size]") {
+            font.setPointSize(value.toInt());
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[bold]") {
+            font.setBold(value == "true");
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[italic]") {
+            font.setItalic(value == "true");
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[underline]") {
+            font.setItalic(value == "true");
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[overline]") {
+            font.setOverline(value == "true");
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[strikeout]") {
+            font.setStrikeOut(value == "true");
+            widget->setFont(font);
+            return;
+        }
+
+        if (property == "font[kerning]") {
+            font.setKerning(value == "true");
+            widget->setFont(font);
+            return;
+        }
+    }
+
+    if (widget->layout()) {
+        int v = value.toInt();
+        QMargins padding = QMargins(widget->layout()->contentsMargins());
+
+        if (property == "padding") {
+            widget->layout()->setContentsMargins(v,v,v,v);
+            return;
+        }
+
+        if (property == "padding[top]") {
+            padding.setTop(v);
+            widget->layout()->setContentsMargins(padding);
+            return;
+        }
+
+        if (property == "padding[left]") {
+            padding.setLeft(v);
+            widget->layout()->setContentsMargins(padding);
+            return;
+        }
+
+        if (property == "padding[right]") {
+            padding.setRight(v);
+            widget->layout()->setContentsMargins(padding);
+            return;
+        }
+
+        if (property == "padding[bottom]") {
+            padding.setBottom(v);
+            widget->layout()->setContentsMargins(padding);
+            return;
+        }
+
+        if (property == "spacing") {
+            widget->layout()->setSpacing(v);
+            return;
+        }
+
+        if (property == "spacing[vertical]") {
+            QGridLayout*gridLayout = dynamic_cast<QGridLayout*>(widget->layout());
+            gridLayout->setVerticalSpacing(v);
+            return;
+        }
+
+        if (property == "spacing[horizontal]") {
+            QGridLayout*gridLayout = dynamic_cast<QGridLayout*>(widget->layout());
+            gridLayout->setHorizontalSpacing(v);
+            return;
+        }
+    }
+
+    widget->setProperty(("_"+property).toLocal8Bit(),value);
 }
 
 void buildStyleSheet(QWidget*widget){
