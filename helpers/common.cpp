@@ -92,6 +92,11 @@ void loadLayout(QString layout_file,QWidget*page){
                 continue;
             }
 
+            if (property.startsWith("@")){
+                assingProperty(list[0],property.mid(1),value);
+                continue;
+            }
+
             if (current_widget) {
                 assingProperty(current_widget,property,value);
             }
