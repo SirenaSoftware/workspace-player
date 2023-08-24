@@ -147,6 +147,7 @@ void assingProperty(QWidget*widget,QString property, QString value) {
     }
 
     if (widget->layout()) {
+        print(property);
         int v = value.toInt();
         QMargins padding = QMargins(widget->layout()->contentsMargins());
 
@@ -212,31 +213,33 @@ void assingProperty(QWidget*widget,QString property, QString value) {
         }
     }
 
+    QString css = widget->property(style_property.toLocal8Bit()).toString();
+
     if (property == "color[background]") {
-        widget->setProperty(style_property.toLocal8Bit(),"background-color: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"background-color: "+value+";");
         return;
     }
 
     if (property == "color[foreground]") {
-        widget->setProperty(style_property.toLocal8Bit(),"color: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"color: "+value+";");
         return;
     }
 
     if (property == "color[alternate]") {
-        widget->setProperty(style_property.toLocal8Bit(),"alternate-background-color: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"alternate-background-color: "+value+";");
         return;
     }
 
     for (const QString &css_property : QList<QString> {"padding","margin","border"} ) {
         if (property == css_property){
-            widget->setProperty(style_property.toLocal8Bit(),property+": "+value+";");
+            widget->setProperty(style_property.toLocal8Bit(),css+property+": "+value+";");
             return;;
         }
 
         if (property.startsWith(css_property)) {
             for (const QString &place : QList<QString> {"top","left","right", "bottom"} ) {
                 if (property == QString(css_property+"["+place+"]")) {
-                    widget->setProperty(style_property.toLocal8Bit(),css_property+"-"+place+": "+value+";");
+                    widget->setProperty(style_property.toLocal8Bit(),css+css_property+"-"+place+": "+value+";");
                     return;
                 }
             }
@@ -245,27 +248,27 @@ void assingProperty(QWidget*widget,QString property, QString value) {
     }
 
     if (property == "radius") {
-        widget->setProperty(style_property.toLocal8Bit(),"border-radius: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"border-radius: "+value+";");
         return;
     }
 
     if (property == "radius[topLeft]") {
-        widget->setProperty(style_property.toLocal8Bit(),"border-top-left-radius: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"border-top-left-radius: "+value+";");
         return;
     }
 
     if (property == "radius[topRight]") {
-        widget->setProperty(style_property.toLocal8Bit(),"border-top-right-radius: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"border-top-right-radius: "+value+";");
         return;
     }
 
     if (property == "radius[bottomLeft]") {
-        widget->setProperty(style_property.toLocal8Bit(),"border-bottom-left-radius: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"border-bottom-left-radius: "+value+";");
         return;
     }
 
     if (property == "radius[bottomRight]") {
-        widget->setProperty(style_property.toLocal8Bit(),"border-bottom-right-radius: "+value+";");
+        widget->setProperty(style_property.toLocal8Bit(),css+"border-bottom-right-radius: "+value+";");
         return;
     }
 
