@@ -188,13 +188,21 @@ void assingProperty(QWidget*widget,QString property, QString value) {
 
         if (property == "spacing[vertical]") {
             QGridLayout*gridLayout = dynamic_cast<QGridLayout*>(widget->layout());
-            gridLayout->setVerticalSpacing(v);
+            if (gridLayout) {
+                gridLayout->setVerticalSpacing(v);
+                return;
+            }
+            widget->layout()->setSpacing(v);
             return;
         }
 
         if (property == "spacing[horizontal]") {
             QGridLayout*gridLayout = dynamic_cast<QGridLayout*>(widget->layout());
-            gridLayout->setHorizontalSpacing(v);
+            if (gridLayout) {
+                gridLayout->setHorizontalSpacing(v);
+                return;
+            }
+            widget->layout()->setSpacing(v);
             return;
         }
     }
