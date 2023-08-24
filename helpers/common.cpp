@@ -30,6 +30,7 @@ QWidget*string2widget(QString id,QString type){
         wdg = new QWidget;
         wdg->setLayout(new QHBoxLayout);
         wdg->layout()->setContentsMargins(0,0,0,0);
+        wdg->layout()->setSpacing(0);
         goto finalize;
     }
 
@@ -37,6 +38,7 @@ QWidget*string2widget(QString id,QString type){
         wdg = new QWidget;
         wdg->setLayout(new QVBoxLayout);
         wdg->layout()->setContentsMargins(0,0,0,0);
+        wdg->layout()->setSpacing(0);
         goto finalize;
     }
 
@@ -147,7 +149,6 @@ void assingProperty(QWidget*widget,QString property, QString value) {
     }
 
     if (widget->layout()) {
-        print(property);
         int v = value.toInt();
         QMargins padding = QMargins(widget->layout()->contentsMargins());
 
@@ -233,7 +234,7 @@ void assingProperty(QWidget*widget,QString property, QString value) {
     for (const QString &css_property : QList<QString> {"padding","margin","border"} ) {
         if (property == css_property){
             widget->setProperty(style_property.toLocal8Bit(),css+property+": "+value+";");
-            return;;
+            return;
         }
 
         if (property.startsWith(css_property)) {
