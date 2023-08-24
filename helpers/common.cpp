@@ -197,11 +197,95 @@ void assingProperty(QWidget*widget,QString property, QString value) {
         }
     }
 
+    QString style_property = "widget_";
+
+    if (property.startsWith("{item}")) {
+        style_property = "item_";
+        property.remove("{item}");
+    }
+
+    for (const QString &state : QList<QString> {"hover","pressed","focus","selected"} ) {
+        if (property.startsWith(state)) {
+            style_property += state;
+            property.remove(state+"->");
+            break;
+        }
+    }
+
+    if (property == "color[background]") {
+        widget->setProperty(style_property.toLocal8Bit(),"background-color: "+value+";");
+        return;
+    }
+
+    if (property == "color[foreground]") {
+        widget->setProperty(style_property.toLocal8Bit(),"color: "+value+";");
+        return;
+    }
+
+    if (property == "color[alternate]") {
+        widget->setProperty(style_property.toLocal8Bit(),"alternate-background-color: "+value+";");
+        return;
+    }
+
+    for (const QString &css_property : QList<QString> {"padding","margin","border"} ) {
+        if (property == css_property){
+            widget->setProperty(style_property.toLocal8Bit(),property+": "+value+";");
+            return;;
+        }
+
+        if (property.startsWith(css_property)) {
+            for (const QString &place : QList<QString> {"top","left","right", "bottom"} ) {
+                if (property == QString(css_property+"["+place+"]")) {
+                    widget->setProperty(style_property.toLocal8Bit(),css_property+"-"+place+": "+value+";");
+                    return;
+                }
+            }
+            break;
+        }
+    }
+
+    if (property == "radius") {
+        widget->setProperty(style_property.toLocal8Bit(),"border-radius: "+value+";");
+        return;
+    }
+
+    if (property == "radius[topLeft]") {
+        widget->setProperty(style_property.toLocal8Bit(),"border-top-left-radius: "+value+";");
+        return;
+    }
+
+    if (property == "radius[topRight]") {
+        widget->setProperty(style_property.toLocal8Bit(),"border-top-right-radius: "+value+";");
+        return;
+    }
+
+    if (property == "radius[bottomLeft]") {
+        widget->setProperty(style_property.toLocal8Bit(),"border-bottom-left-radius: "+value+";");
+        return;
+    }
+
+    if (property == "radius[bottomRight]") {
+        widget->setProperty(style_property.toLocal8Bit(),"border-bottom-right-radius: "+value+";");
+        return;
+    }
+
     widget->setProperty(("_"+property).toLocal8Bit(),value);
 }
 
 void buildStyleSheet(QWidget*widget){
+    QString id = "#"+widget->objectName();
+    QString stylesheet = "";
 
+    for (const QString &level : QList<QString> {"widget_", "item_"} ) {
+        for (const QString &state : QList<QString> {"", ":hover",":pressed",":focus",":selected"} ) {
+            QString css_block = widget->property((level+state.mid(1)).toLocal8Bit()).toString();
+            if (css_block != "") {
+                stylesheet += id+(level=="item_"?"::item":"")+state+"{"+css_block+"}\n";
+            }
+        }
+    }
+
+    widget->setStyleSheet(stylesheet);
 }
 
 void loadLayout(QString layout_file,QWidget*page){
