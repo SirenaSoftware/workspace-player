@@ -22,12 +22,13 @@ QStringList processSAMLLine(QString line){
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include "components/Box.h"
 
 QWidget*string2widget(QString id,QString type){
     QWidget*wdg = nullptr;
 
     if (type == "HBox") {
-        wdg = new QWidget;
+        wdg = new Box;
         wdg->setLayout(new QHBoxLayout);
         wdg->layout()->setContentsMargins(0,0,0,0);
         wdg->layout()->setSpacing(0);
@@ -35,7 +36,7 @@ QWidget*string2widget(QString id,QString type){
     }
 
     if (type == "VBox") {
-        wdg = new QWidget;
+        wdg = new Box;
         wdg->setLayout(new QVBoxLayout);
         wdg->layout()->setContentsMargins(0,0,0,0);
         wdg->layout()->setSpacing(0);
@@ -148,7 +149,7 @@ void assingProperty(QWidget*widget,QString property, QString value) {
         }
     }
 
-    if (widget->layout()) {
+    if (widget->metaObject()->className()==QString("Box")&&widget->layout()) {
         int v = value.toInt();
         QMargins padding = QMargins(widget->layout()->contentsMargins());
 
