@@ -28,6 +28,9 @@ HEADERS += \
 FORMS += \
     workspace.ui
 
+INCLUDEPATH += /usr/include/lua5.4/
+LIBS += -llua5.4
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
