@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     components/Box.cpp \
+    components/Button.cpp \
     events/addModulePage.cpp \
     events/editBar.cpp \
     events/functionKeysBar.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     components/Box.h \
+    components/Button.h \
     helpers/common.h \
     workspace.h
 
