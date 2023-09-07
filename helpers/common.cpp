@@ -20,10 +20,6 @@ QStringList processSAMLLine(QString line){
     return QStringList() << property.trimmed().remove(" ") << value << QString::number(i/2);
 }
 
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include "components/Box.h"
-
 QWidget*string2widget(QString id,QString type){
     QWidget*wdg = nullptr;
 
@@ -40,6 +36,11 @@ QWidget*string2widget(QString id,QString type){
         wdg->setLayout(new QVBoxLayout);
         wdg->layout()->setContentsMargins(0,0,0,0);
         wdg->layout()->setSpacing(0);
+        goto finalize;
+    }
+
+    if (type == "Button") {
+        wdg = new Button;
         goto finalize;
     }
 
@@ -301,7 +302,7 @@ void buildStyleSheet(QWidget*widget){
     widget->setStyleSheet(stylesheet);
 }
 
-void loadLayout(QString layout_file,QWidget*page){
+void loadLayout(QString layout_file,ModuleViewer*page){
     QFile file(layout_file);
 
     if (file.open(QFile::ReadOnly)){
