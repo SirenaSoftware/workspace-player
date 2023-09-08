@@ -20,7 +20,7 @@ QStringList processSAMLLine(QString line){
     return QStringList() << property.trimmed().remove(" ") << value << QString::number(i/2);
 }
 
-QWidget*string2widget(QString id,QString type){
+QWidget*string2widget(QString id,QString type,ModuleViewer*page){
     QWidget*wdg = nullptr;
 
     if (type == "HBox") {
@@ -40,7 +40,9 @@ QWidget*string2widget(QString id,QString type){
     }
 
     if (type == "Button") {
-        wdg = new Button;
+        Button*btn = new Button;
+        btn->L = page->L;
+        wdg = btn;
         goto finalize;
     }
 
@@ -336,7 +338,7 @@ void loadLayout(QString layout_file,ModuleViewer*page){
                     buildStyleSheet(current_widget);
                 }
 
-                current_widget = string2widget(id,value);
+                current_widget = string2widget(id,value,page);
                 list[indent+1] = current_widget;
 
                 if (parent_widget->layout()) {
