@@ -4,11 +4,12 @@ This software loads the workspaces, is the main component of Sirena OS, everythi
 
 # Depends
 
-This is a Qt 6 application developed over a Kubuntu environment, everything you need at this time is install:
+This is a Qt 6 + Lua application developed over a Kubuntu environment, everything you need at this time is install:
 
 - `qtcreator`
 - `qmake6`
 - `qt6-base-dev`
+- `liblua5.4-dev`
 
 > If you is getting error "No valid suitable kits found", do this on Qt Creator:
 > 
