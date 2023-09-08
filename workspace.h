@@ -90,6 +90,7 @@ private:
 
     void loadCategories(QString type,QListWidget*list);
 
+    void loadModule(QString module);
     void loadConfig();
 
     const QString LANG = QString(qgetenv("LANG")).remove(".UTF-8");
@@ -97,6 +98,8 @@ private:
     QString WORKSPACE_ID = "sirena.demonstration";
     QString WORKSPACE_PATH = "sirena/demonstration";
     QString WORKSPACE_CLASS = "empty";
+
+    QMap<QString,QWidget*> loaded_modules;
 
 };
 #endif // WORKSPACE_H

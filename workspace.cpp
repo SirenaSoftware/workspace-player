@@ -1,5 +1,6 @@
 #include "workspace.h"
 #include "ui_workspace.h"
+#include "components/ModuleViewer.h"
 #include <QTimer>
 #include <QFile>
 
@@ -17,6 +18,7 @@ Workspace::Workspace(QWidget *parent)
     ui->leftBar->hide();
 
     loadConfig();
+    loadModule("welcome");
 
     if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg").exists()) {
         ui->callWorkspaceViewer->setIcon(QIcon(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg"));
@@ -332,4 +334,42 @@ void Workspace::loadConfig(){
     }
 
     print("File '"+ROOT+"/workspaces/"+WORKSPACE_PATH+"/config"+"' not found");
+}
+
+void Workspace::loadModule(QString module){
+
+    if (loaded_modules[module] == nullptr) {
+        QString layout = "";
+
+        QFile file(ROOT+"/workspaces/"+WORKSPACE_PATH+"/modules/"+module+".yml");
+        if (file.open(QFile::ReadOnly)){
+            QTextStream file_data(&file);
+            while (!file_data.atEnd()) {
+                QStringList line = processSAMLLine(file_data.readLine());
+
+                QString property = line[0];
+                QString value = line[1];
+
+                if (property == "layout") {
+                    layout = value;
+                    continue;
+                }
+            }
+
+            ModuleViewer*page = new ModuleViewer();
+            ui->modulesPage->addWidget(page);
+            loadLayout(ROOT+"/workspaces/"+WORKSPACE_PATH+"/layouts/"+layout+".yml",page);
+            page->loadScript(ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/welcome.lua");
+
+            ui->modulesPage->setCurrentWidget(page);
+
+            loaded_modules[module] = page;
+            return;
+        }
+
+        print("File '"+ROOT+"/workspaces/"+WORKSPACE_PATH+"/modules/"+module+".yml' not found");
+        return;
+    }
+
+    ui->modulesPage->setCurrentWidget(loaded_modules[module]);
 }
