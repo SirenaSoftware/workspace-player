@@ -18,6 +18,10 @@ Workspace::Workspace(QWidget *parent)
 
     loadConfig();
 
+    if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg").exists()) {
+        ui->callWorkspaceViewer->setIcon(QIcon(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg"));
+    }
+
     _on_clock_update();
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Workspace::_on_clock_update);
