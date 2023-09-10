@@ -20,6 +20,32 @@ QStringList processSAMLLine(QString line){
     return QStringList() << property.trimmed().remove(" ") << value << QString::number(i/2);
 }
 
+static int widget_set_property(lua_State* L) {
+    QWidget *wdg = (QWidget *)lua_touserdata(L, 1);
+    wdg->setProperty(lua_tostring(L,2),lua_tostring(L,3));
+
+    lua_settop(L, 0);
+    return 0;
+}
+
+static int widget_get_property(lua_State* L) {
+    QWidget *wdg = (QWidget *)lua_touserdata(L, 1);
+    QVariant value = wdg->property(lua_tostring(L,2));
+
+    lua_settop(L, 0);
+    lua_pushstring(L,value.toString().toStdString().c_str());
+    return 1;
+}
+
+void registerWidgetOnLua(QWidget*widget,lua_State*L){
+    lua_getglobal(L, "registerWidget"); // 2
+    lua_pushlightuserdata(L,widget);
+    lua_pushstring(L,widget->objectName().toStdString().c_str());
+    lua_pushcfunction(L,widget_set_property);
+    lua_pushcfunction(L,widget_get_property);
+    lua_call(L,4,0);
+}
+
 QWidget*string2widget(QString id,QString type,ModuleViewer*page){
     QWidget*wdg = nullptr;
 
@@ -50,6 +76,7 @@ QWidget*string2widget(QString id,QString type,ModuleViewer*page){
 
 finalize:
     wdg->setObjectName(id);
+    registerWidgetOnLua(wdg,page->L);
     return wdg;
 }
 

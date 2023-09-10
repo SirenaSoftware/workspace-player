@@ -18,5 +18,6 @@ extern QWidget*string2widget(QString id, QString type, ModuleViewer *page);
 extern void loadLayout(QString layout_file,ModuleViewer*page);
 extern void assingProperty(QWidget*widget,QString property, QString value);
 extern void buildStyleSheet(QWidget*widget);
+extern void registerWidgetOnLua(QWidget*widget,lua_State*L);
 
 #endif // COMMON_H
