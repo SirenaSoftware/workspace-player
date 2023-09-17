@@ -14,7 +14,9 @@ signals:
 
 private slots:
     void onclick(bool checked);
-
+    void onpress();
+    void onrelease();
+    void ontoggle(bool checked);
 };
 
 #endif // BUTTON_H
