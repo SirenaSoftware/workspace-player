@@ -9,6 +9,7 @@ This is a Qt 6 + Lua application developed over a Kubuntu environment, everythin
 - `qtcreator`
 - `qmake6`
 - `qt6-base-dev`
+- `libqt6svg6-dev`
 - `liblua5.4-dev`
 
 > If you is getting error "No valid suitable kits found", do this on Qt Creator:

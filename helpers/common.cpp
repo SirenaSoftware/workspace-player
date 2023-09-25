@@ -121,6 +121,28 @@ void assingProperty(QWidget*widget,QString property, QString value) {
         return;
     }
 
+    if (property.startsWith("icon[")) {
+        QSize iconSize = widget->property("iconSize").toSize();
+        int v = value.toInt();
+
+        if (property == "icon[width]") {
+            iconSize.setWidth(v);
+            widget->setProperty("iconSize",iconSize);
+            return;
+        }
+
+        if (property == "icon[height]") {
+            iconSize.setHeight(v);
+            widget->setProperty("iconSize",iconSize);
+            return;
+        }
+
+        if (property == "icon[side]") {
+            widget->setProperty("iconSize",QSize(v,v));
+            return;
+        }
+    }
+
     if (property.startsWith("font[")) {
         QFont font = QFont(widget->font());
 
@@ -334,6 +356,12 @@ void buildStyleSheet(QWidget*widget){
 void loadLayout(QString layout_file,ModuleViewer*page){
     QFile file(layout_file);
 
+    QString ROOT = page->property("ROOT").toString();
+    QString WORKSPACE_PATH = ROOT+"/workspaces/"+page->property("WORKSPACE_PATH").toString();
+
+    page->setProperty("ROOT","");
+    page->setProperty("WORKSPACE_PATH","");
+
     if (file.open(QFile::ReadOnly)){
         QTextStream file_data(&file);
 
@@ -383,6 +411,25 @@ void loadLayout(QString layout_file,ModuleViewer*page){
             }
 
             if (current_widget) {
+                if (property == "icon") {
+                    if (QFile(WORKSPACE_PATH+"/assets/icons/"+value+".svg").exists()) {
+                        current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/assets/icons/"+value+".svg"));
+                        continue;
+                    }
+
+                    if (QFile(ROOT+"/system/icons/colorful/"+value+".svg").exists()) {
+                        current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/system/icons/colorful/"+value+".svg"));
+                        continue;
+                    }
+
+                    if (QFile(WORKSPACE_PATH+"/"+value).exists()) {
+                        current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/"+value));
+                        continue;
+                    }
+
+                    current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/system/icons/colorful/missing-icon.svg"));
+                    continue;
+                }
                 assingProperty(current_widget,property,value);
             }
         }
