@@ -358,6 +358,10 @@ void Workspace::loadModule(QString module){
 
             ModuleViewer*page = new ModuleViewer();
             ui->modulesPage->addWidget(page);
+
+            page->setProperty("ROOT",ROOT);
+            page->setProperty("WORKSPACE_PATH",WORKSPACE_PATH);
+
             loadLayout(ROOT+"/workspaces/"+WORKSPACE_PATH+"/layouts/"+layout+".yml",page);
             page->loadScript(ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/welcome.lua");
 
