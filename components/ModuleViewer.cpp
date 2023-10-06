@@ -48,3 +48,28 @@ void ModuleViewer::paintEvent(QPaintEvent *event){
 
     style()->drawPrimitive(QStyle::PE_Widget, &option, &painter, this);
 }
+
+void ModuleViewer::dumpComponents(QWidget * parent, QFile *file) {
+   QObjectList childrens = parent->children();
+   while ( childrens.begin() != childrens.end() ) {
+      QWidget * children = (QWidget *)(*childrens.begin()++);
+
+      QString widget_data = children->property("data").toString();
+
+      if (!widget_data.isEmpty()&&children->objectName()!="") {
+          file->write((children->objectName()+": "+widget_data+"\n").toLocal8Bit());
+      }
+
+      dumpComponents(children, file);
+   }
+}
+
+void ModuleViewer::writeData(QString fname){
+    QFile file(fname);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    file.resize(0);
+
+    dumpComponents(this,&file);
+
+    file.close();
+}
