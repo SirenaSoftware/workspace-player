@@ -1,5 +1,7 @@
 #include "ModuleViewer.h"
+#include "helpers/common.h"
 #include <QVBoxLayout>
+#include <QDir>
 
 ModuleViewer::ModuleViewer(QWidget *parent)
     : QWidget{parent}
@@ -49,19 +51,61 @@ void ModuleViewer::paintEvent(QPaintEvent *event){
     style()->drawPrimitive(QStyle::PE_Widget, &option, &painter, this);
 }
 
-void ModuleViewer::dumpComponents(QWidget * parent, QFile *file) {
+void ModuleViewer::dumpComponentData(QWidget * parent, QFile *file) {
    QObjectList childrens = parent->children();
-   while ( childrens.begin() != childrens.end() ) {
-      QWidget * children = (QWidget *)(*childrens.begin()++);
+   QObjectList::iterator it = childrens.begin();
+
+   while ( it != childrens.end() ) {
+      QWidget* children = (QWidget *)(*it);
 
       QString widget_data = children->property("data").toString();
+      bool descartable = children->property("descartable").toBool();
+      bool separated = children->property("separated").toBool();
+      bool edited = children->property("edited").toBool();
 
-      if (!widget_data.isEmpty()&&children->objectName()!="") {
-          file->write((children->objectName()+": "+widget_data+"\n").toLocal8Bit());
+      if (edited&&!descartable&&separated&&children->objectName()!="") {
+
+          QFile file(PATH+children->objectName()+".data");
+          if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+              QTextStream out(&file);
+              out << children->property("data").toString();
+              file.close();
+          }
       }
 
-      dumpComponents(children, file);
+      if (!widget_data.isEmpty()&&children->objectName()!=""&&!descartable&&!separated) {
+          file->write((children->objectName()+": \""+widget_data+"\"\n").toLocal8Bit());
+      }
+
+      dumpComponentData(children, file);
+      ++it;
    }
+}
+
+void ModuleViewer::loadComponentData(QWidget * parent, QMap<QString,QString>*data){
+    QObjectList childrens = parent->children();
+    QObjectList::iterator it = childrens.begin();
+
+    while ( it != childrens.end() ) {
+       QWidget* children = (QWidget *)(*it);
+       QString value = data->value(QString(children->objectName()));
+       bool descartable = children->property("descartable").toBool();
+       bool separated = children->property("separated").toBool();
+
+       if (value != ""&&!descartable&&!separated) {
+           children->setProperty("data",value);
+       } else if (separated&&children->objectName()!="") {
+           QFile file(PATH+children->objectName()+".data");
+           if (file.open(QIODevice::ReadOnly)) {
+               QTextStream in(&file);
+               children->setProperty("data",in.readAll());
+               file.close();
+           }
+       }
+
+       loadComponentData(children, data);
+       ++it;
+    }
 }
 
 void ModuleViewer::writeData(QString fname){
@@ -69,7 +113,34 @@ void ModuleViewer::writeData(QString fname){
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     file.resize(0);
 
-    dumpComponents(this,&file);
+    dumpComponentData(this,&file);//&file);
 
     file.close();
+}
+
+void ModuleViewer::loadData(QString fname){
+    QMap<QString,QString> data;
+
+    PATH = fname.mid(0,fname.length()-4)+"/";
+    QDir().mkdir(PATH);
+
+    QFile file(fname);
+
+    if (file.open(QFile::ReadOnly)){
+        QTextStream file_data(&file);
+        while (!file_data.atEnd()) {
+            QStringList line = processSAMLLine(file_data.readLine());
+
+            QString property = line[0];
+            QString value = line[1];
+
+            data[property] = value;
+        }
+        file.close();
+
+        loadComponentData(this, &data);
+        return;
+    }
+
+    print("File '"+fname+"' not found");
 }
