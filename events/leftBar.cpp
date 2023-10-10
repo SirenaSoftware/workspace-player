@@ -16,9 +16,7 @@ void Workspace::on_moduleOptions_clicked()
 
 }
 
-
-void Workspace::on_moduleList_itemActivated(QListWidgetItem *item)
+void Workspace::on_moduleList_itemClicked(QListWidgetItem *item)
 {
-    Q_UNUSED(item);
+    loadModule(item->data(40).toString());
 }
-

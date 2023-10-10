@@ -24,6 +24,8 @@ Workspace::Workspace(QWidget *parent)
         ui->callWorkspaceViewer->setIcon(QIcon(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg"));
     }
 
+    loadModuleList();
+
     _on_clock_update();
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Workspace::_on_clock_update);
@@ -336,6 +338,61 @@ void Workspace::loadConfig(){
     print("File '"+ROOT+"/workspaces/"+WORKSPACE_PATH+"/config"+"' not found");
 }
 
+void Workspace::loadModuleList(){
+    QFile file(ROOT+"/workspaces/"+WORKSPACE_PATH+"/module_list.yml");
+
+    if (file.open(QFile::ReadOnly)){
+        QTextStream file_data(&file);
+        while (!file_data.atEnd()) {
+            QStringList line = processSAMLLine(file_data.readLine());
+
+            QString property = line[0];
+            QString value = line[1];
+
+            QString icon = value.mid(0,value.indexOf(" # "));
+            QString label = value.mid(value.indexOf(" # ")+3);
+
+            QListWidgetItem *item = new QListWidgetItem;
+            item->setText(label);
+            item->setData(40,property);
+            item->setData(41,icon);
+            item->setSizeHint(QSize(40,40));
+
+            if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/assets/icons/"+icon+".svg").exists()) {
+                icon = ROOT+"/workspaces/"+WORKSPACE_PATH+"/assets/icons/"+icon+".svg";
+
+                item->setIcon(QIcon(icon));
+                ui->moduleList->addItem(item);
+                continue;
+            }
+
+            if (QFile(ROOT+"/system/icons/colorful/"+icon+".svg").exists()) {
+                icon = ROOT+"/system/icons/colorful/"+icon+".svg";
+
+                item->setIcon(QIcon(icon));
+                ui->moduleList->addItem(item);
+                continue;
+            }
+
+            if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/"+icon).exists()) {
+                icon = ROOT+"/workspaces/"+WORKSPACE_PATH+"/"+icon;
+                item->setIcon(QIcon(icon));
+                ui->moduleList->addItem(item);
+                continue;
+            }
+
+            icon = ROOT+"/system/icons/colorful/missing-icon.svg";
+
+            item->setIcon(QIcon(icon));
+            ui->moduleList->addItem(item);
+        }
+        file.close();
+        return;
+    }
+
+    print(ROOT+"/workspaces/"+WORKSPACE_PATH+"/module_list.yml"+"' not found");
+}
+
 void Workspace::loadModule(QString module){
 
     if (loaded_modules[module] == nullptr) {
@@ -377,3 +434,6 @@ void Workspace::loadModule(QString module){
 
     ui->modulesPage->setCurrentWidget(loaded_modules[module]);
 }
+
+
+

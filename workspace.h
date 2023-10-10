@@ -57,7 +57,7 @@ private slots:
     // Left bar widget
     void on_addModule_clicked();
     void on_moduleOptions_clicked();
-    void on_moduleList_itemActivated(QListWidgetItem *item);
+    void on_moduleList_itemClicked(QListWidgetItem *item);
 
     // Edit bar buttons
     void on_gotoSecondBar_clicked();
@@ -91,6 +91,7 @@ private:
     void loadCategories(QString type,QListWidget*list);
 
     void loadModule(QString module);
+    void loadModuleList();
     void loadConfig();
 
     const QString LANG = QString(qgetenv("LANG")).remove(".UTF-8");
