@@ -4,7 +4,7 @@
 
 void Workspace::on_exportersCategories_itemActivated(QListWidgetItem *item)
 {
-
+    loadItems(item->data(42).toString(),ui->exportersList);
 }
 
 

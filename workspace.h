@@ -89,6 +89,7 @@ private:
     void showChrome();
 
     void loadCategories(QString type,QListWidget*list);
+    void loadItems(QString category, QListWidget*list);
 
     void loadModule(QString module);
     void loadModuleList();

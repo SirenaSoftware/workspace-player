@@ -103,6 +103,7 @@ void Workspace::hideChrome(){
 
 
 void Workspace::loadCategories(QString type,QListWidget*list){
+    list->clear();
 
     for (const QString &source : QList<QString> { "_common", WORKSPACE_CLASS, WORKSPACE_PATH} ) {
         for (const QString &category : QDir(ROOT+type+"/"+source).entryList(QDir::Dirs)) {
@@ -137,6 +138,37 @@ void Workspace::loadCategories(QString type,QListWidget*list){
 
     if (list->item(0)) {
         list->itemActivated(list->item(0));
+    }
+}
+
+void Workspace::loadItems(QString category,QListWidget*list) {
+    list->clear();
+
+    for (const QString &source : QList<QString> { "_common", WORKSPACE_CLASS, WORKSPACE_PATH} ) {
+        QString dpath = ROOT+"/modules/"+source+"/"+category+"/";
+
+        for (const QString &module : QDir(dpath).entryList(QDir::Dirs|QDir::NoDotAndDotDot)) {
+            dpath = dpath+module+"/";
+
+            QFile label(dpath+"/label."+LANG);
+
+            if (!label.exists()){
+                label.setFileName(dpath+"/label");
+                if (!label.exists()) continue;
+            }
+
+            label.open(QFile::ReadOnly);
+
+            QListWidgetItem*item = new QListWidgetItem;
+            item->setText(QString(label.readAll()).remove("\n").remove("\r"));
+            item->setIcon(QIcon(dpath+"/icon.svg"));
+            item->setData(42,dpath);
+            item->setSizeHint(QSize(48,60));
+
+            list->addItem(item);
+
+            label.close();
+        }
     }
 }
 
