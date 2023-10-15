@@ -7,8 +7,14 @@
 class Input : public QLineEdit
 {
     Q_OBJECT
+    Q_PROPERTY(QString data READ data WRITE setData)
+
 public:
     explicit Input(QWidget *parent = nullptr);
+
+    void setData(QString value);
+    QString data();
+
     lua_State *L = nullptr;
 signals:
 private slots:

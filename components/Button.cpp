@@ -12,6 +12,14 @@ Button::Button(QWidget *parent)
     connect(this,SIGNAL(toggled(bool)),this,SLOT(ontoggle(bool)));
 }
 
+void Button::setLabel(QString value) {
+    setText(value);
+}
+
+QString Button::label(){
+    return text();
+}
+
 void Button::onclick(bool checked){
     QString onclick = property("onclick").toString();
 

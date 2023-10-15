@@ -11,7 +11,12 @@ CONFIG += c++11
 SOURCES += \
     components/Box.cpp \
     components/Button.cpp \
+    components/CheckBox.cpp \
+    components/Input.cpp \
+    components/Label.cpp \
     components/ModuleViewer.cpp \
+    components/PlainTextEdit.cpp \
+    components/ProgressBar.cpp \
     events/addModulePage.cpp \
     events/editBar.cpp \
     events/functionKeysBar.cpp \
@@ -25,7 +30,12 @@ SOURCES += \
 HEADERS += \
     components/Box.h \
     components/Button.h \
+    components/CheckBox.h \
+    components/Input.h \
+    components/Label.h \
     components/ModuleViewer.h \
+    components/PlainTextEdit.h \
+    components/ProgressBar.h \
     helpers/common.h \
     workspace.h
 

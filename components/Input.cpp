@@ -10,6 +10,14 @@ Input::Input(QWidget *parent)
     connect(this,SIGNAL(textChanged(QString)),this,SLOT(onchange(QString)));
 }
 
+void Input::setData(QString value){
+    setText(value);
+}
+
+QString Input::data(){
+    return text();
+}
+
 void Input::onedited(){
     QString event = property("onedited").toString();
 
