@@ -38,6 +38,15 @@ void Workspace::on_callExportOrPrint_clicked()
 
 void Workspace::on_discardModifications_clicked()
 {
+    for(int i = ui->modulesPage->count(); i >= 0; i--)
+    {
+        QWidget* widget = ui->modulesPage->widget(i);
+        if (widget) {
+        ui->modulesPage->removeWidget(widget);
+        widget->deleteLater();
+        }
+    }
+
     close();
 }
 
@@ -58,6 +67,10 @@ void Workspace::_on_clock_update(){
 
 void Workspace::on_saveModifications_clicked()
 {
+    for (QString id : loaded_modules.keys()) {
+        QString fname = ROOT+"/workspaces/"+WORKSPACE_PATH+"/data/"+id+".yml";
+        static_cast<ModuleViewer*>(loaded_modules[id])->writeData(fname);
+    }
     close();
 }
 

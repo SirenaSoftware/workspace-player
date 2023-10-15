@@ -16,7 +16,9 @@ void Workspace::on_moduleOptions_clicked()
 
 }
 
+
 void Workspace::on_moduleList_itemClicked(QListWidgetItem *item)
 {
     loadModule(item->data(40).toString());
 }
+

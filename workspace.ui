@@ -35,6 +35,24 @@ Workspace {
   outline: none;
 }
 
+*[boxCheckBox=true] {
+  color: #000000; /**/
+  border: none;
+}
+
+*[boxCheckBox=true] &gt; QPushButton {
+  background-color: #c9ffff; /**/
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,128);
+  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  height: 32;
+  width: 32;
+}
+
+*[boxCheckBox=true] &gt; QPushButton:checked {
+  background-color: #96e1e1; /**/
+}
+
 *[topButton=true] {
   padding: 9;
   border-radius: 3px;
@@ -49,12 +67,13 @@ Workspace {
 }
 
 *[topButton=true]:pressed,
+*[boxButton=true]:checked,
 #hamburguerButton:checked {
   border-bottom: 1px solid rgba(0,0,0,128);
   background-color: #96e1e1; /**/
 }
 
-#workspaceName {
+#workspaceName,#moduleName {
   background-color: #c9ffff; /**/
   border: 0px;
   padding: 9;
@@ -63,12 +82,12 @@ Workspace {
   border-bottom: 2px solid rgba(0,0,0,128);
 }
 
-#workspaceName:hover {
+#workspaceName:hover,#moduleName:hover {
   border-top: 1px solid rgba(0, 0, 0, 128);
   border-bottom: 2px solid rgba(0,0,0,128); 
 }
 
-#workspaceName:focus {
+#workspaceName:focus,#moduleName:focus {
   border-top: 1px solid rgba(0, 0, 0, 128);
   border-bottom: 1px solid rgba(0, 0, 0, 128);
 }
@@ -157,7 +176,6 @@ QListWidget {
   border: 0;
   text-align: left;
   padding: 6;
-  padding-top: 0;
   background-color: transparent;
   color: #000000; /**/
 }
@@ -166,6 +184,10 @@ QListWidget::item {
   color: #000000; /**/
   padding-left: 2;
   background-color: transparent;
+}
+
+#moduleList{
+  padding-top:0;
 }
 
 #moduleList::item:hover {
@@ -182,11 +204,11 @@ QListWidget::item {
   background-color: #ffff00; /**/
 }
 
-#modulesPage {
+#modulesPage,#insertContentPage {
   background-color: #aa0000; /**/
 }
 
-#addModuebox {
+#addModulebox,#configurationModulebox {
   background-color: #00aa7f; /**/
 }
 
@@ -222,10 +244,28 @@ QListWidget::item {
   background-color: #008261; /**/
 }
 
+*[boxButton=true] {
+  padding: 9;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,128);
+  border-bottom: 2px solid rgba(0,0,0,128); /**/
+  background-color: #aaffff; /**/
+  color: #000000; /**/
+}
+
+*[boxButton=true]:hover {
+  background-color: #c8ffff; /**/
+}
+
+*[boxButton=true]:pressed {
+  border-bottom: 1px solid rgba(0,0,0,128);
+  background-color: #96e1e1; /**/
+}
+
 QFrame[line=true] {
   border: 1px solid rgba(0, 0, 0, 128); /**/
 }
-</string>
+rr</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -359,6 +399,12 @@ QFrame[line=true] {
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
              </property>
              <property name="topButton" stdset="0">
               <bool>true</bool>
@@ -659,7 +705,7 @@ QFrame[line=true] {
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
          <widget class="QStackedWidget" name="modulesPage"/>
          <widget class="QWidget" name="printPage">
@@ -910,7 +956,7 @@ QFrame[line=true] {
                 </spacer>
                </item>
                <item>
-                <widget class="QWidget" name="addModuebox" native="true">
+                <widget class="QWidget" name="addModulebox" native="true">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -1069,6 +1115,335 @@ QFrame[line=true] {
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="configureModule">
+          <layout class="QVBoxLayout" name="verticalLayout_13">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <spacer name="verticalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QWidget" name="configurationModulebox" native="true">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>600</width>
+                   <height>400</height>
+                  </size>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_12">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QWidget" name="widget_4" native="true">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>40</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>50</height>
+                     </size>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_10">
+                     <property name="leftMargin">
+                      <number>12</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>6</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="label_3">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <pointsize>14</pointsize>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Personalize it!</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="pushButton">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>72</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>Add</string>
+                       </property>
+                       <property name="boxButton" stdset="0">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_10">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>1</height>
+                     </size>
+                    </property>
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="line" stdset="0">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_14">
+                    <property name="spacing">
+                     <number>9</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>16</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>16</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>16</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>16</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_4">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Give a name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="moduleName"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="moduleVariationsLabel">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Choose a variation</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="moduleVariations" native="true">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>48</height>
+                       </size>
+                      </property>
+                      <layout class="QHBoxLayout" name="_2">
+                       <property name="spacing">
+                        <number>9</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="aditionalModuleOptionsLabel">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>Aditional options</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QScrollArea" name="scrollArea">
+                      <property name="autoFillBackground">
+                       <bool>false</bool>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: transparent;</string>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::NoFrame</enum>
+                      </property>
+                      <property name="widgetResizable">
+                       <bool>true</bool>
+                      </property>
+                      <widget class="QWidget" name="aditionalModuleOptions">
+                       <property name="geometry">
+                        <rect>
+                         <x>0</x>
+                         <y>0</y>
+                         <width>568</width>
+                         <height>129</height>
+                        </rect>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_15">
+                        <property name="spacing">
+                         <number>9</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
+                       </layout>
+                      </widget>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="insertContentPage"/>
         </widget>
        </item>
@@ -1162,6 +1537,12 @@ QFrame[line=true] {
                <width>16777215</width>
                <height>34</height>
               </size>
+             </property>
+             <property name="font">
+              <font>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
              </property>
              <property name="text">
               <string/>
