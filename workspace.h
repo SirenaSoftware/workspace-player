@@ -20,6 +20,7 @@ class Workspace : public QMainWindow
 public:
     Workspace(QWidget *parent = nullptr);
     ~Workspace();
+    QString findIconByName(QString name);
 
 private slots:
     // Function keys
@@ -72,12 +73,14 @@ private slots:
     void on_gotoLine_clicked();
 
     // Add module page
-    void on_externalModulesCategories_itemActivated(QListWidgetItem *item);
-    void on_externalModulesList_itemActivated(QListWidgetItem *item);
+    void on_externalModulesCategories_itemClicked(QListWidgetItem *item);
+    void on_externalModulesList_itemClicked(QListWidgetItem *item);
 
     // Export or print page
     void on_exportersCategories_itemActivated(QListWidgetItem *item);
     void on_exportersList_itemActivated(QListWidgetItem *item);
+
+    void on_addModuleToWorkspace_clicked();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -102,6 +105,7 @@ private:
     QString WORKSPACE_CLASS = "empty";
 
     QMap<QString,QWidget*> loaded_modules;
+    QStringList remove_on_discard;
 
 };
 #endif // WORKSPACE_H

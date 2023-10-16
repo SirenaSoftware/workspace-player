@@ -1241,7 +1241,7 @@ rr</string>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QPushButton" name="pushButton">
+                      <widget class="QPushButton" name="addModuleToWorkspace">
                        <property name="minimumSize">
                         <size>
                          <width>0</width>

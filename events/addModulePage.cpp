@@ -36,7 +36,7 @@ void Workspace::on_externalModulesList_itemClicked(QListWidgetItem *item)
         btn->setMaximumSize(QSize(48,48));
         btn->setAutoExclusive(true);
         btn->setCheckable(true);
-        btn->setProperty("vpath",vpath);
+        btn->setProperty("vpath",vpath+"/"+x+"/");
         btn->setProperty("boxButton",true);
 
         ui->moduleVariations->layout()->addWidget(btn);

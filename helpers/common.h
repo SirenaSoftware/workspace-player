@@ -9,7 +9,11 @@
 #include <QHBoxLayout>
 #include "components/Box.h"
 #include "components/Button.h"
+#include "components/CheckBox.h"
+#include "components/Input.h"
 #include "components/ModuleViewer.h"
+#include "components/PlainTextEdit.h"
+#include "components/ProgressBar.h"
 
 extern void print(QString message);
 extern QStringList processSAMLLine(QString line);

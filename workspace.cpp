@@ -25,6 +25,7 @@ Workspace::Workspace(QWidget *parent)
     }
 
     loadModuleList();
+    ui->moduleVariations->layout()->setAlignment(Qt::AlignLeft);
 
     _on_clock_update();
     QTimer *timer = new QTimer(this);
@@ -137,7 +138,7 @@ void Workspace::loadCategories(QString type,QListWidget*list){
     list->sortItems();
 
     if (list->item(0)) {
-        list->itemActivated(list->item(0));
+        list->itemClicked(list->item(0));
     }
 }
 
@@ -445,13 +446,14 @@ void Workspace::loadModule(QString module){
                 }
             }
 
-            ModuleViewer*page = new ModuleViewer();
-            ui->modulesPage->addWidget(page);
-
-            page->setProperty("ROOT",ROOT);
-            page->setProperty("WORKSPACE_PATH",WORKSPACE_PATH);
-
+            ModuleViewer*page = new ModuleViewer;
+            page->setParent(this);
             loadLayout(ROOT+"/workspaces/"+WORKSPACE_PATH+"/layouts/"+layout+".yml",page);
+
+            QString fname = ROOT+"/workspaces/"+WORKSPACE_PATH+"/data/"+module+".yml";
+            page->loadData(fname);
+
+            ui->modulesPage->addWidget(page);
             page->loadScript(ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/welcome.lua");
 
             ui->modulesPage->setCurrentWidget(page);
@@ -467,5 +469,27 @@ void Workspace::loadModule(QString module){
     ui->modulesPage->setCurrentWidget(loaded_modules[module]);
 }
 
+QString Workspace::findIconByName(QString name){
+    if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/assets/icons/"+name+".svg").exists()) {
+        return ROOT+"/workspaces/"+WORKSPACE_PATH+"/assets/icons/"+name+".svg";
+    }
 
+    if (QFile(ROOT+"/system/assets/icons/colorful/"+name+".svg").exists()) {
+        return ROOT+"/system/assets/icons/colorful/"+name+".svg";
+    }
+
+    if (QFile(ROOT+"/system/assets/icons/black/"+name+".svg").exists()) {
+        return ROOT+"/system/assets/icons/black/"+name+".svg";
+    }
+
+    if (QFile(ROOT+"/system/assets/icons/white/"+name+".svg").exists()) {
+        return ROOT+"/system/assets/icons/white/"+name+".svg";
+    }
+
+    if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/"+name).exists()) {
+        return ROOT+"/workspaces/"+WORKSPACE_PATH+"/"+name;
+    }
+
+    return ROOT+"/system/assets/icons/colorful/missing-icon.svg";
+}
 

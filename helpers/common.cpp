@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QFile>
 
+#include "workspace.h"
+
 void print(QString message){
     qDebug() << message;
 }
@@ -72,6 +74,41 @@ QWidget*string2widget(QString id,QString type,ModuleViewer*page){
         goto finalize;
     }
 
+    if (type == "Button") {
+        CheckBox*chk = new CheckBox;
+        chk->L = page->L;
+        wdg = chk;
+        goto finalize;
+    }
+
+    if (type == "Input") {
+        Input*input = new Input;
+        input->L = page->L;
+        wdg = input;
+        goto finalize;
+    }
+
+    if (type == "HProgressBar") {
+        ProgressBar*bar = new ProgressBar;
+        bar->L = page->L;
+        wdg = bar;
+        goto finalize;
+    }
+
+    if (type == "VProgressBar") {
+        ProgressBar*bar = new ProgressBar;
+        bar->L = page->L;
+        wdg = bar;
+        goto finalize;
+    }
+
+    if (type == "PlainTextEdit") {
+        PlainTextEdit*editor = new PlainTextEdit;
+        editor->L = page->L;
+        wdg = editor;
+        goto finalize;
+    }
+
     wdg = new QWidget;
 
 finalize:
@@ -119,28 +156,6 @@ void assingProperty(QWidget*widget,QString property, QString value) {
     if (property == "height[max]") {
         widget->setMaximumHeight(value.toInt());
         return;
-    }
-
-    if (property.startsWith("icon[")) {
-        QSize iconSize = widget->property("iconSize").toSize();
-        int v = value.toInt();
-
-        if (property == "icon[width]") {
-            iconSize.setWidth(v);
-            widget->setProperty("iconSize",iconSize);
-            return;
-        }
-
-        if (property == "icon[height]") {
-            iconSize.setHeight(v);
-            widget->setProperty("iconSize",iconSize);
-            return;
-        }
-
-        if (property == "icon[side]") {
-            widget->setProperty("iconSize",QSize(v,v));
-            return;
-        }
     }
 
     if (property.startsWith("font[")) {
@@ -354,13 +369,9 @@ void buildStyleSheet(QWidget*widget){
 }
 
 void loadLayout(QString layout_file,ModuleViewer*page){
+    Workspace* workspace = qobject_cast<Workspace*>(page->parent());
+
     QFile file(layout_file);
-
-    QString ROOT = page->property("ROOT").toString();
-    QString WORKSPACE_PATH = ROOT+"/workspaces/"+page->property("WORKSPACE_PATH").toString();
-
-    page->setProperty("ROOT","");
-    page->setProperty("WORKSPACE_PATH","");
 
     if (file.open(QFile::ReadOnly)){
         QTextStream file_data(&file);
@@ -412,22 +423,7 @@ void loadLayout(QString layout_file,ModuleViewer*page){
 
             if (current_widget) {
                 if (property == "icon") {
-                    if (QFile(WORKSPACE_PATH+"/assets/icons/"+value+".svg").exists()) {
-                        current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/assets/icons/"+value+".svg"));
-                        continue;
-                    }
-
-                    if (QFile(ROOT+"/system/icons/colorful/"+value+".svg").exists()) {
-                        current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/system/icons/colorful/"+value+".svg"));
-                        continue;
-                    }
-
-                    if (QFile(WORKSPACE_PATH+"/"+value).exists()) {
-                        current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/"+value));
-                        continue;
-                    }
-
-                    current_widget->setProperty("icon",QIcon(WORKSPACE_PATH+"/system/icons/colorful/missing-icon.svg"));
+                    current_widget->setProperty("icon",QIcon(workspace->findIconByName(value)));
                     continue;
                 }
                 assingProperty(current_widget,property,value);

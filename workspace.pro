@@ -18,6 +18,7 @@ SOURCES += \
     components/PlainTextEdit.cpp \
     components/ProgressBar.cpp \
     events/addModulePage.cpp \
+    events/configureModule.cpp \
     events/editBar.cpp \
     events/functionKeysBar.cpp \
     events/leftBar.cpp \
