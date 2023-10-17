@@ -123,6 +123,11 @@ void assingProperty(QWidget*widget,QString property, QString value) {
         return;
     }
 
+    if (property == "hidden" && value == "true") {
+        widget->setHidden(true);
+        return;
+    }
+
     if (property == "pos[y]") {
         widget->move(widget->x(),value.toInt());
         return;
@@ -426,6 +431,11 @@ void loadLayout(QString layout_file,ModuleViewer*page){
                     current_widget->setProperty("icon",QIcon(workspace->findIconByName(value)));
                     continue;
                 }
+
+                if (!page->property(("%"+id+"@"+property).toLocal8Bit()).toString().isEmpty()){
+                    value = page->property(("%"+id+"@"+property).toLocal8Bit()).toString();
+                }
+
                 assingProperty(current_widget,property,value);
             }
         }

@@ -58,12 +58,29 @@ void Workspace::_on_clock_update(){
     ui->clock->setText(text);
 }
 
-
 void Workspace::on_saveModifications_clicked()
 {
     for (QString id : loaded_modules.keys()) {
         QString fname = ROOT+"/workspaces/"+WORKSPACE_PATH+"/data/"+id+".yml";
         static_cast<ModuleViewer*>(loaded_modules[id])->writeData(fname);
+    }
+
+    if (ui->moduleList->property("modified").toBool()) {
+        QFile file(ROOT+"/workspaces/"+WORKSPACE_PATH+"/module_list.yml");
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
+        file.resize(0);
+
+        for(int i = 0; i < ui->moduleList->count();i++) {
+            QListWidgetItem * item = ui->moduleList->item(i);
+
+            QString id = item->data(40).toString();
+            QString icon = item->data(41).toString();
+            QString label = item->text();
+
+            file.write((id+": "+icon+" # "+label+"\n").toLocal8Bit());
+        }
+
+        file.close();
     }
 
     close();

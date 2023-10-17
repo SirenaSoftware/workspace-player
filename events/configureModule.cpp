@@ -40,11 +40,12 @@ void Workspace::on_addModuleToWorkspace_clicked(){
     class_name = class_name == "_common"?"_common":WORKSPACE_ID;
 
     QString common_id = class_name+"_"+name+"_"+variation;
-    QString module_id = common_id+"_"+QString::number(QDateTime::currentMSecsSinceEpoch()-1649289600000);
+    const QString module_id = common_id+"_"+QString::number(QDateTime::currentMSecsSinceEpoch()-1649289600000);
 
-    module_descriptor += "layout: "+common_id+".yml";
+    module_descriptor += "layout: "+common_id;
 
     // Let's copy the module
+
 
     if (!QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/modules/"+module_id+".yml").exists()) {
         QDir().mkdir(ROOT+"/workspaces/"+WORKSPACE_PATH+"/modules/");
@@ -61,7 +62,6 @@ void Workspace::on_addModuleToWorkspace_clicked(){
     if (!QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/"+common_id+".lua").exists()) {
         QDir().mkdir(ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/");
         QFile::copy(path+"/script.lua",ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/"+common_id+".lua");
-        print("script");
         remove_on_discard.append(ROOT+"/workspaces/"+WORKSPACE_PATH+"/scripts/"+common_id+".lua");
     }
 
@@ -87,10 +87,11 @@ void Workspace::on_addModuleToWorkspace_clicked(){
     item->setText(module_name.isEmpty()?"No title":module_name);
     item->setIcon(QIcon(ROOT+"/workspaces/"+WORKSPACE_PATH+"/assets/icons/"+common_id+".svg"));
     item->setData(40,module_id);
-    item->setData(41,common_id+".svg");
+    item->setData(41,"/assets/icons/"+common_id+".svg");
     item->setSizeHint(QSize(40,40));
 
     ui->moduleList->addItem(item);
+    ui->moduleList->setProperty("modified",true);
 
     ui->contentPager->setCurrentWidget(ui->modulesPage);
     showChrome();
