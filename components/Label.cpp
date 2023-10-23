@@ -3,7 +3,7 @@
 Label::Label(QWidget *parent)
     : QLabel{parent}
 {
-    connect(this,SIGNAL(textChanged(QString)),this,SLOT(onchange(QString)));
+    connect(this,SIGNAL(linkActivated(QString)),this,SLOT(onchange(QString)));
 }
 
 void Label::onopenlink(const QString text){
