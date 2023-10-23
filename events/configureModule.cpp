@@ -23,6 +23,18 @@ void Workspace::on_addModuleToWorkspace_clicked(){
             QString widget = control_item->widget()->property("component").toString();
             QString data = control_item->widget()->property("data").toString();
 
+            if (control_item->widget()->property("boxColorBox").toBool()) {
+                QLayoutItem* color;
+                while ( ( color = control_item->widget()->layout()->takeAt( 0 ) ) != nullptr ){
+                    if (color->widget()->property("checked").toBool()) {
+                        data = color->widget()->property("data").toString();
+                        break;
+                    }
+                }
+                delete color->widget();
+                delete color;
+            }
+
             module_descriptor += widget+"@"+property+": "+data+"\n";
 
             delete control_item->widget();
@@ -45,7 +57,6 @@ void Workspace::on_addModuleToWorkspace_clicked(){
     module_descriptor += "layout: "+common_id;
 
     // Let's copy the module
-
 
     if (!QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/modules/"+module_id+".yml").exists()) {
         QDir().mkdir(ROOT+"/workspaces/"+WORKSPACE_PATH+"/modules/");
