@@ -17,15 +17,38 @@ Workspace::Workspace(QWidget *parent)
     ui->leftBar->resize(ui->leftBar->width(),height()-ui->leftBar->y());
     ui->leftBar->hide();
 
-    loadConfig();
     loadModule("welcome");
 
     if (QFile(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg").exists()) {
         ui->callWorkspaceViewer->setIcon(QIcon(ROOT+"/workspaces/"+WORKSPACE_PATH+"/icon.svg"));
     }
 
+    loadConfig();
     loadModuleList();
+
+    setProperty("wallpaper","/home/natanael/build-workspace-Desktop-Debug/img100.jpg");
+
     ui->moduleVariations->layout()->setAlignment(Qt::AlignLeft);
+
+    if (QApplication::arguments().contains("--desktop")) {
+        ui->leftBar->layout()->setContentsMargins(4,4,4,4);
+
+        ui->moduleBoxHeader->hide();
+        ui->line->hide();
+        ui->moduleBox->layout()->setContentsMargins(0,6,0,0);
+        ui->moduleBox->setMaximumHeight(ui->moduleList->count()*48);
+
+        ui->discardModifications->hide();
+
+        ui->callExportOrPrint->hide();
+
+        ui->saveModifications->setProperty("forceDiscard",true);
+        ui->saveModifications->setProperty("loadModule","__shutdown");
+        ui->saveModifications->setText("Shutdown...");
+
+        ui->centralwidget->setStyleSheet("#centralwidget{background-image:url(\""+
+                                         property("wallpaper").toString()+"\");}");
+    }
 
     _on_clock_update();
     QTimer *timer = new QTimer(this);
@@ -186,6 +209,11 @@ void Workspace::loadConfig(){
 
             if (property == "title") {
                 ui->workspaceName->setText(value);
+                continue;
+            }
+
+            if (property == "wallpaper") {
+                setProperty("wallpaper",value);
                 continue;
             }
 
