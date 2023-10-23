@@ -75,7 +75,10 @@ void Workspace::on_externalModulesList_itemClicked(QListWidgetItem *item)
             QString property = line[0];
             QString value = line[1];
 
-            property = property.startsWith("--")?"Label":property;
+            if (property.startsWith("--")) {
+                property = "type";
+                value = "Label";
+            }
 
             if (property == "type") {
                 if (control) {
